@@ -1,0 +1,22 @@
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xs);
+}
+
+.logo-container__logo {
+  width: 3.9rem;
+}
+
+.logo-container__logo img {
+  width: 100%;
+}
+

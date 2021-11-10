@@ -1,0 +1,11 @@
+.grey-card {
+  background: var(--color-white);
+  margin-top: var(--space-xs);
+  padding: var(--space-lrg) var(--space-med) 0 var(--space-med);
+  border-radius: var(--br-lrg);
+  box-shadow: var(--bs-secondary);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

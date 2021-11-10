@@ -1,0 +1,14 @@
+.sidebar {
+  width: 8.5rem;
+  height: 100vh;
+  background: var(--color-grey-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 1) 1px 0px 1px;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+

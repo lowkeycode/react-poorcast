@@ -1,0 +1,5 @@
+.overview {
+  background: var(--color-white-pure);
+  display: flex;
+  position: relative;
+}

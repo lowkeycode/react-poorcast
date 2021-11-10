@@ -1,0 +1,31 @@
+.person-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-sml);
+}
+
+.person-heading__heading--name {
+  font-weight: 400;
+}
+
+.person-heading__heading--balance {
+  display: flex;
+  align-items: center;
+}
+
+.balance-copy {
+  margin-right: var(--space-sml);
+  font-weight: 500;
+}
+
+.balance-balance {
+  font-weight: 400;
+  font-size: var(--fs-sml);
+  display: flex;
+
+}
+
+.balance-balance span {
+  font-weight: 400;
+  font-size: var(--fs-xs);
+}

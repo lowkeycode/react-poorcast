@@ -1,0 +1,15 @@
+.add-person {
+  width: 83%;
+  display: flex;
+  justify-content: flex-end;
+  margin: var(--space-xs) 0 var(--space-sml) 0;
+  margin-right: var(--space-xs);
+}
+
+.add-person-img {
+  width: 1.6rem;
+}
+
+.add-person-img img {
+  width: 100%;
+}
