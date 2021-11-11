@@ -4,6 +4,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid blue;
   padding-bottom: var(--space-xl);
 }

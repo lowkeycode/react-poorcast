@@ -1,5 +1,5 @@
 import realtime from './firebase/realtime';
-import { ref, push, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -25,7 +25,7 @@ function App() {
     });
   }, [])
 
-  // After users have loaded format each user with accounts for accounts page
+  // After users have loaded, format each user with accounts for accounts page
   useEffect(() => {
     let userAccts = [];
 
@@ -111,25 +111,20 @@ function App() {
     ],
   };
 
-  const saveUser = () => {
-    const dbRef = ref(realtime);
-
-    push(dbRef, user);
-  }
+  
 
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={<Overview/>}/>
           
-        <Route exact path="/accounts" element={<Accounts saveUser={saveUser} accts={formattedAccts}/>}/>
+        <Route exact path="/accounts" element={<Accounts  accts={formattedAccts}/>}/>
 
         <Route exact path="/addPerson" element={<AddPerson/>}/>
 
         <Route exact path="/settings" element={<Settings/>}/>
 
       </Routes>
-
     </Router>
   )
 }
