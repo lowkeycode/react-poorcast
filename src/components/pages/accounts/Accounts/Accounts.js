@@ -5,13 +5,12 @@ import Person from '../Person/Person';
 
 import styles from './Accounts.module.css';
 
-const Accounts = ({saveUser, accts}) => {
+const Accounts = ({accts}) => {
 
   return (
     <div className={styles.accounts}>
       <Sidebar />
       <Main>
-        <button onClick={saveUser}>Save</button>
         <AddPersonBtn />
         {
           accts.map(acct => {

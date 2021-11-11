@@ -14,7 +14,7 @@ const Person = ({name, accts}) => {
   
   return (
     <section className ={styles.person}>
-      <PersonHeading name={name}/>
+      <PersonHeading name={name} accts={acctsArr}/>
       <GreyCard>
         {
           acctsArr.map(acct => {

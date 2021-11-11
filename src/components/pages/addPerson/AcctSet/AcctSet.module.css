@@ -10,9 +10,20 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.acct-set div {
+  margin-bottom: var(--space-xs);
 }
 
 .acct-set input {
   width: 100%;
+}
+
+.save {
+  width: 1.2rem;
+  background: none;
+  border: none;
+  align-self: flex-end;
+  cursor: pointer;
 }

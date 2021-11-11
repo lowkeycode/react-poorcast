@@ -1,6 +1,17 @@
 import styles from './PersonHeading.module.css';
 
-const PersonHeading = ({name}) => {
+const PersonHeading = ({name, accts}) => {
+
+  console.log('p heading: ', accts);
+
+  const currentBalance = accts.map(acct => {
+    return ((+acct.acctLimit) - (+acct.acctSpent)) + (+acct.acctBalance);
+  }).reduce((acc, cur) => {
+    return acc + cur
+  }, 0);
+
+  console.log(currentBalance);
+
   return (
     <div className ={styles['person-heading']}>
 
@@ -9,7 +20,7 @@ const PersonHeading = ({name}) => {
       <div className={styles['person-heading__heading--balance']}>
         <p className={styles['balance-copy']}>Current Balance</p>
         
-        <p className={styles['balance-balance']}><span>$</span>4000.00</p>
+        <p className={styles['balance-balance']}><span>$</span>{currentBalance}</p>
       </div>
 
     </div>
