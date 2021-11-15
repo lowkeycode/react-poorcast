@@ -1,0 +1,14 @@
+
+
+.save-container {
+  display: flex;
+  align-self: flex-end;
+}
+
+.save {
+  width: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: .4rem;
+}

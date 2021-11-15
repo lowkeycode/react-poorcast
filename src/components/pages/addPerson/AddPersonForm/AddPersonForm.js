@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ref, push} from "firebase/database";
 
 import realtime from '../../../../firebase/realtime';

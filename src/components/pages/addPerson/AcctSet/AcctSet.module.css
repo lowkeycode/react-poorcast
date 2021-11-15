@@ -6,24 +6,26 @@
   border-radius: var(--br-med);
   margin: 0 var(--space-xs) var(--space-lrg) var(--space-xs);
   
-  padding: var(--space-xs);
+  padding: .5rem;
 
   display: flex;
   flex-direction: column;
 }
 
 .acct-set div {
-  margin-bottom: var(--space-xs);
+  margin-bottom: .5rem;
 }
 
-.acct-set input {
+.acct-set input,
+.acct-set select {
   width: 100%;
 }
 
-.save {
-  width: 1.2rem;
-  background: none;
-  border: none;
-  align-self: flex-end;
-  cursor: pointer;
+.saved {
+   align-self: center;
+   border: 2px solid var(--color-grey-dark);
+   padding: .2rem var(--space-xs);
+   border-radius: var(--br-sml);
+   background: var(--color-green-light);
+   font-weight: 300;
 }
