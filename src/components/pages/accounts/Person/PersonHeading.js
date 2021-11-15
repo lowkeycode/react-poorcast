@@ -1,16 +1,13 @@
+import { allAcctsBalance } from '../../../../utils/utils';
+
 import styles from './PersonHeading.module.css';
 
 const PersonHeading = ({name, accts}) => {
 
   console.log('p heading: ', accts);
 
-  const currentBalance = accts.map(acct => {
-    return ((+acct.acctLimit) - (+acct.acctSpent)) + (+acct.acctBalance);
-  }).reduce((acc, cur) => {
-    return acc + cur
-  }, 0);
+  const currentBalance = allAcctsBalance(accts);
 
-  console.log(currentBalance);
 
   return (
     <div className ={styles['person-heading']}>

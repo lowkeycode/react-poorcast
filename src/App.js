@@ -116,7 +116,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Overview/>}/>
+        <Route exact path="/" element={<Overview accts={formattedAccts}/>}/>
           
         <Route exact path="/accounts" element={<Accounts  accts={formattedAccts}/>}/>
 

@@ -5,6 +5,7 @@ import Account from '../Account/Account';
 import styles from './Person.module.css';
 
 const Person = ({name, accts}) => {
+  
 
   let acctsArr = [];
 
