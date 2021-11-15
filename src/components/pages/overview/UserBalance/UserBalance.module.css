@@ -1,0 +1,33 @@
+.user-balance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .2rem var(--space-med);
+}
+
+.name {
+  font-size: var(--fs-sml);
+}
+
+.cur-bal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 45%;
+}
+
+.cur-bal__copy {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+
+.cur-bal__balance {
+  font-weight: 400;
+  font-size: var(--fs-sml);
+  display: flex;
+}
+
+.cur-bal__balance span {
+  font-weight: 400;
+  font-size: var(--fs-xs);
+}
