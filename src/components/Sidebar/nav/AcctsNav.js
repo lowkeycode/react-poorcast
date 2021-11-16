@@ -5,7 +5,7 @@ import overviewSvg from '../../../img/calendar-outline.svg';
 import transferSvg from '../../../img/swap-horizontal-outline.svg';
 
 
-const AcctsNav = () => {
+const AcctsNav = ({openTransferModal}) => {
   return (
     <>
       <li className={styles['nav__links--link']}>
@@ -15,9 +15,9 @@ const AcctsNav = () => {
         <p className={styles['icon-description']}>Budget</p>
       </li> 
       <li className={styles['nav__links--link']}>
-        <Link to="/overview">
-          <img src={transferSvg} alt="Link to transfer between accounts"/>
-        </Link>
+          <button className={styles.transfer}>
+            <img onClick={openTransferModal} src={transferSvg} alt="Link to transfer between accounts"/>
+          </button>
         <p className={styles['icon-description']}>Transfer</p>
       </li>
     </>

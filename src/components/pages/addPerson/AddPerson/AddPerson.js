@@ -7,7 +7,7 @@ import styles from './AddPerson.module.css';
 const AddPerson = () => {
   return (
     <div className={styles['add-person']}>
-      <Sidebar/>
+      <Sidebar />
       <Main>
         <AddPersonForm/>
       </Main>

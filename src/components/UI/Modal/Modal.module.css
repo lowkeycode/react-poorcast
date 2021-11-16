@@ -1,0 +1,10 @@
+.card {
+  position: fixed; 
+  padding: var(--space-med);
+  background: var(--color-grey-light);
+  top: 20vh;
+  width: 60vw;
+  height: 60vh;
+  z-index: 2;
+}
+

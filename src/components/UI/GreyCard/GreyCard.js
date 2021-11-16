@@ -1,8 +1,8 @@
 import styles from './GreyCard.module.css';
 
-const GreyCard = ({children}) => {
+const GreyCard = ({children, className}) => {
   return (
-    <div className={styles['grey-card']}>
+    <div className={`${styles.card} ${className}`}>
       {children}
     </div>
   )
