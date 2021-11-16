@@ -5,7 +5,7 @@ import AddPersonNav from './AddPersonNav';
 import styles from './Nav.module.css';
 
 
-const Nav = () => {
+const Nav = ({openTransferModal}) => {
   
 
   return (
@@ -15,7 +15,7 @@ const Nav = () => {
           window.location.pathname === '/' && <OverviewNav/>
         }
         {
-          window.location.pathname === '/accounts' && <AcctsNav />
+          window.location.pathname === '/accounts' && <AcctsNav openTransferModal={openTransferModal}/>
         }
         {
           window.location.pathname === '/addPerson' && <AddPersonNav />

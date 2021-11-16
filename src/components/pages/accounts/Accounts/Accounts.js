@@ -6,12 +6,11 @@ import Modal from '../../../UI/Modal/Modal';
 
 import styles from "./Accounts.module.css";
 
-const Accounts = ({ accts, modalOpen }) => {
-  console.log(modalOpen);
+const Accounts = ({ accts, modalOpen, openTransferModal }) => {
 
   return (
     <div className={styles.accounts}>
-      <Sidebar />
+      <Sidebar openTransferModal={openTransferModal}/>
       <Main>
         <AddPersonBtn />
         {accts.map((acct) => {
