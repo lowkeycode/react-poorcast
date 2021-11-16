@@ -1,21 +1,16 @@
-import ChequingsSavings from '../ChequingsSavings/ChequingsSavings';
-import Credit from '../Credit/Credit';
+import ChequingsSavings from "../ChequingsSavings/ChequingsSavings";
+import Credit from "../Credit/Credit";
 
-const Account = ({acctInfo}) => {
-
-  console.log('acctInfo: ', acctInfo);
-
+const Account = ({ acctInfo }) => {
   return (
     <>
-      {
-        acctInfo.acctType === 'chequings/savings' ? (
-          <ChequingsSavings acctInfo={acctInfo} />
-        ) : (
-          <Credit acctInfo={acctInfo}/>
-        )
-      }
+      {acctInfo.acctType === "chequings/savings" ? (
+        <ChequingsSavings acctInfo={acctInfo} />
+      ) : (
+        <Credit acctInfo={acctInfo} />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default Account
+export default Account;

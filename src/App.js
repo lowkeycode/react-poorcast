@@ -12,6 +12,7 @@ function App() {
 
   const [users, setUsers] = useState([]);
   const [formattedAccts, setFormattedAccts] = useState([]);
+  const [transferModalOpen, setTransferModalOpen] = useState(true);
 
   // Get all user info on page load
   useEffect(() => {
@@ -118,7 +119,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Overview accts={formattedAccts}/>}/>
           
-        <Route exact path="/accounts" element={<Accounts  accts={formattedAccts}/>}/>
+        <Route exact path="/accounts" element={<Accounts  accts={formattedAccts} modalOpen={transferModalOpen}/>}/>
 
         <Route exact path="/addPerson" element={<AddPerson/>}/>
 

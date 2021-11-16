@@ -11,7 +11,6 @@
 
 .cur-bal {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 45%;
 }
@@ -19,12 +18,15 @@
 .cur-bal__copy {
   font-size: var(--fs-xs);
   font-weight: 500;
+  align-self: flex-end;
 }
 
 .cur-bal__balance {
   font-weight: 400;
   font-size: var(--fs-sml);
   display: flex;
+  align-self: flex-end;
+  margin-bottom: -2px;
 }
 
 .cur-bal__balance span {

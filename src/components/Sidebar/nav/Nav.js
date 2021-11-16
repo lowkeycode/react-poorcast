@@ -6,7 +6,6 @@ import styles from './Nav.module.css';
 
 
 const Nav = () => {
-
   
 
   return (

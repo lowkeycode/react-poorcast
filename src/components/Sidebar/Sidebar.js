@@ -6,7 +6,6 @@ import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
 
-  // ${styles['form-control']}
   return (
     <aside className={styles.sidebar}>
       <Logo/>
