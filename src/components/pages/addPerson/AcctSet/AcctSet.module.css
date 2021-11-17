@@ -2,7 +2,7 @@
   width: 10rem;
   height: 15rem;
   background: var(--color-white-pure);
-  border: 1px solid var(--color-grey-light);
+  border: 1px solid var(--color-grey-med);
   border-radius: var(--br-med);
   margin: 0 var(--space-xs) var(--space-lrg) var(--space-xs);
   

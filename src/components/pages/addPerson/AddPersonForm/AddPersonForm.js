@@ -4,6 +4,7 @@ import { ref, push} from "firebase/database";
 import realtime from '../../../../firebase/realtime';
 import GreyCard from '../../../UI/GreyCard/GreyCard';
 import AcctSet from '../AcctSet/AcctSet';
+import BlackButton from '../../../UI/BlackButton/BlackButton';
 
 import styles from './AddPersonForm.module.css';
 import addAccountSvg from '../../../../img/add-circle-outline.svg';
@@ -77,7 +78,7 @@ const AddPersonForm = () => {
 
         </div>
 
-        <button className={styles['submit']} type="submit">Save User</button>
+        <BlackButton text='Save User'/>
       </form>
     </GreyCard>
   )
