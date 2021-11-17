@@ -1,10 +1,12 @@
 .card {
   position: fixed; 
   padding: var(--space-med);
-  background: var(--color-grey-light);
+  background: var(--color-white);
   top: 20vh;
   width: 60vw;
   height: 60vh;
   z-index: 2;
+
+  border: 1px solid red;
 }
 

@@ -1,0 +1,43 @@
+.transfer-form {
+  border: 1px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.form-heading {
+  text-align: center;
+  width: 100%;
+  font-size: var(--fs-med);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.arrow {
+  width: 2.75rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+}
+
+.arrow img {
+  width: 100%;
+  align-self: center;
+}
+
+.acct-set {
+  width: 10rem;
+  height: 15rem;
+  background: var(--color-white-pure);
+  border: 1px solid var(--color-grey-med);
+  border-radius: var(--br-med);
+  margin: var(--space-xs);
+  
+  padding: .5rem;
+
+  display: flex;
+  flex-direction: column;
+}
+

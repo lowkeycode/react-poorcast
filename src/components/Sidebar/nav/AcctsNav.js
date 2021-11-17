@@ -15,9 +15,9 @@ const AcctsNav = ({openTransferModal}) => {
         <p className={styles['icon-description']}>Budget</p>
       </li> 
       <li className={styles['nav__links--link']}>
-          <button className={styles.transfer}>
-            <img onClick={openTransferModal} src={transferSvg} alt="Link to transfer between accounts"/>
-          </button>
+        <button className={styles.transfer}>
+          <img onClick={openTransferModal} src={transferSvg} alt="Link to transfer between accounts"/>
+        </button>
         <p className={styles['icon-description']}>Transfer</p>
       </li>
     </>
