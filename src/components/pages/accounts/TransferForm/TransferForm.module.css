@@ -1,9 +1,8 @@
 .transfer-form {
-  border: 1px solid blue;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .form-heading {
@@ -41,3 +40,17 @@
   flex-direction: column;
 }
 
+.acct-set div {
+  margin-bottom: .5rem;
+}
+
+.acct-set input,
+.acct-set select {
+  width: 100%;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -16,7 +16,7 @@ const AcctEdit = ({ selectAccount, nameAccount, onAcctSpend, onAcctLimit, onAcct
       </button>
     </div>
 
-    <div className>
+    <div>
       <label htmlFor="acct-name">Account Name</label>
       <input id="acct-name" type="text" required onChange={nameAccount} />
     </div>
