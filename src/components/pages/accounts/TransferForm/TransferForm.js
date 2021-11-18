@@ -1,9 +1,57 @@
+import realtime from '../../../../firebase/realtime';
+import { onValue, ref } from 'firebase/database';
+import { useState, useEffect } from 'react';
+
 import BlackButton from '../../../UI/BlackButton/BlackButton';
 
 import styles from './TransferForm.module.css';
 import rightArrow from '../../../../img/arrow-forward-outline.svg';
 
 const TransferForm = () => {
+  const [users, setUsers] = useState([]);
+  const [userOptions, setUserOptions] = useState([]);
+
+  // On render set get accts from db and save to state to decouple from other useEffects
+  useEffect(() => {
+
+    const dbRef = ref(realtime);
+
+    onValue(dbRef, snapshot => {
+      const accts = snapshot.val();
+      
+      setUsers(accts);
+    })
+    
+  }, [])
+
+  // Set user options from acct names in state
+  useEffect(() => {
+    
+    let userArr = [{
+      label: 'Select User',
+      value: 'placeholder'
+    }];
+
+    for (let acct in users) {
+
+      console.log(userArr);
+
+      const user = {
+        label: users[acct].name,
+        value: users[acct].name.toLowerCase()
+      };
+
+      console.log(user)
+
+      userArr = [...userArr, user];
+
+    }
+    setUserOptions(userArr)
+  }, [users])
+  
+  console.log(userOptions);
+
+
   return (
     <form className={styles['transfer-form']}>
       <h3 className={styles['form-heading']}>Transfer</h3>
@@ -11,21 +59,29 @@ const TransferForm = () => {
         <legend>From</legend>
 
         <div>
-          <label for="user">User</label>
+          <label htmlFor="user">User</label>
+
+          <select name="user" id="user" value={userOptions}>
+            
+            {
+              userOptions.map((option, i) => {
+                return <option key={i} value="option.value">{option.label}</option>
+              })
+            }
+          </select>
+
+
+        </div>
+
+        <div>
+          <label htmlFor="user">Account</label>
           <select name="user" id="user">
             
           </select>
         </div>
 
         <div>
-          <label for="user">Account</label>
-          <select name="user" id="user">
-            
-          </select>
-        </div>
-
-        <div>
-          <label for="amount">Amount</label>
+          <label htmlFor="amount">Amount</label>
           <input type="number"/>
         </div>
 
@@ -37,14 +93,14 @@ const TransferForm = () => {
         <legend>To</legend>
 
         <div>
-          <label for="user">User</label>
+          <label htmlFor="user">User</label>
           <select name="user" id="user">
             
           </select>
         </div>
 
         <div>
-          <label for="user">Account</label>
+          <label htmlFor="user">Account</label>
           <select name="user" id="user">
             
           </select>
