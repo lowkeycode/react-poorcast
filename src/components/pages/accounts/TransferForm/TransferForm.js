@@ -51,6 +51,29 @@ const TransferForm = () => {
     setUserOptions(userArr);
   }, [users]);
 
+
+  useEffect(() => {
+    const dbRef = ref(realtime);
+
+    onValue(dbRef, snapshot => {
+      const users = snapshot.val();
+
+
+      for (let user in users) {
+        console.log('fromUserSelected', fromUserSelected);
+        console.log('looped name', users[user].name);
+        if(users[user].name === fromUserSelected) {
+          console.log(user);
+        }
+      }
+
+
+      console.log(users)
+    })
+  }, [fromUserSelected]) 
+
+
+  
   // Set user to transfer FROM and retrieve that users accts
   const handleFromUserSelection = (e) => {
     setFromUserSelected(e.target.value);
@@ -77,9 +100,7 @@ const TransferForm = () => {
     setFromAmount(e.target.value);
   };
 
-  const subtractFromUserAcct = () => {
-    ref()
-  }
+  
 
   return (
     <form className={styles["transfer-form"]}>
