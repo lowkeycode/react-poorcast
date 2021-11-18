@@ -10,6 +10,7 @@ import rightArrow from '../../../../img/arrow-forward-outline.svg';
 const TransferForm = () => {
   const [users, setUsers] = useState([]);
   const [userOptions, setUserOptions] = useState([]);
+  const [userSelected, setUserSelected] = useState('placeholder')
 
   // On render set get accts from db and save to state to decouple from other useEffects
   useEffect(() => {
@@ -26,12 +27,7 @@ const TransferForm = () => {
 
   // Set user options from acct names in state
   useEffect(() => {
-    
-    let userArr = [{
-      label: 'Select User',
-      value: 'placeholder'
-    }];
-
+    let userArr = [];
     for (let acct in users) {
 
       console.log(userArr);
@@ -51,6 +47,12 @@ const TransferForm = () => {
   
   console.log(userOptions);
 
+  const handleUserSelection = (e) => {
+    setUserSelected(e.target.value);
+  }
+
+
+  //  todo create FromSet & ToSet components
 
   return (
     <form className={styles['transfer-form']}>
@@ -60,17 +62,14 @@ const TransferForm = () => {
 
         <div>
           <label htmlFor="user">User</label>
-
-          <select name="user" id="user" value={userOptions}>
-            
+          <select value={userSelected} onChange={handleUserSelection} name="user" id="user">
+            <option value="placeholder" disabled>Select User</option>
             {
               userOptions.map((option, i) => {
-                return <option key={i} value="option.value">{option.label}</option>
+                return <option key={i} value={option.value}>{option.label}</option>
               })
             }
           </select>
-
-
         </div>
 
         <div>
