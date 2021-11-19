@@ -20,15 +20,15 @@ export const retrieveUserAccts = (e, setStateFunc) => {
 
       const capitalizeUser = lowerCasedUser.slice(0, 1).toUpperCase() + lowerCasedUser.slice(1);
       
-      console.log(capitalizeUser);
+      // console.log(capitalizeUser);
 
       let foundUserAccts;
       let formattedAccts = [];
 
 
       for (let user in users) {
-        console.log('users: ', users);
-        console.log('user: ', users[user].name);
+        // console.log('users: ', users);
+        // console.log('user: ', users[user].name);
 
         if(users[user].name === capitalizeUser) {
           foundUserAccts = users[user].accts;
@@ -45,6 +45,10 @@ export const retrieveUserAccts = (e, setStateFunc) => {
 
       setStateFunc(formattedAccts);
 
-      console.log('foundUserAccts', foundUserAccts);
+      // console.log('foundUserAccts', foundUserAccts);
     })
+}
+
+export const capitalize = (string) => {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
 }

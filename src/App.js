@@ -124,6 +124,7 @@ function App() {
             <Accounts
               accts={formattedAccts}
               modalOpen={transferModalOpen}
+              setModalOpen={setTransferModalOpen}
               openTransferModal={onTransferModalOpen}
             />
           }

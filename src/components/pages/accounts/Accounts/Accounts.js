@@ -6,7 +6,7 @@ import Modal from "../../../UI/Modal/Modal";
 
 import styles from "./Accounts.module.css";
 
-const Accounts = ({ accts, modalOpen, openTransferModal }) => {
+const Accounts = ({ accts, modalOpen, openTransferModal, setModalOpen }) => {
   return (
     <div className={styles.accounts}>
       <Sidebar openTransferModal={openTransferModal} />
@@ -18,7 +18,7 @@ const Accounts = ({ accts, modalOpen, openTransferModal }) => {
           })
         }
 
-        {modalOpen && <Modal />}
+        {modalOpen && <Modal setModalOpen={setModalOpen}/>}
       </Main>
     </div>
   );
