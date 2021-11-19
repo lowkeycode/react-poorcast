@@ -48,3 +48,7 @@ export const retrieveUserAccts = (e, setStateFunc) => {
       // console.log('foundUserAccts', foundUserAccts);
     })
 }
+
+export const capitalize = (string) => {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
+}

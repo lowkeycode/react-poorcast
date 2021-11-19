@@ -4,12 +4,12 @@ import TransferForm from '../../pages/accounts/TransferForm/TransferForm';
 
 import styles from './Modal.module.css';
 
-const Modal = () => {
+const Modal = ({setModalOpen}) => {
   return (
     <>
       <Overlay/>
       <GreyCard className={styles.card}>
-        <TransferForm/>
+        <TransferForm setModalOpen={setModalOpen}/>
       </GreyCard>
     </>
     
