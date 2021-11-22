@@ -1,5 +1,5 @@
 import realtime from "../../../../firebase/realtime";
-import { onValue, ref, update, get } from "firebase/database";
+import { onValue, ref, update } from "firebase/database";
 import { useState, useEffect } from "react";
 
 import { retrieveUserAccts, capitalize } from "../../../../utils/utils";
@@ -26,8 +26,8 @@ const TransferForm = ({ setModalOpen }) => {
   const [toUserAccts, setToUserAccts] = useState([]);
   const [toUserAcctSelected, setToUserAcctSelected] = useState("placeholder");
 
-  const [fromUserKey, setFromUserKey] = useState('');
-  const [toUserKey, setToUserKey] = useState('');
+  const [fromUserKey, setFromUserKey] = useState("");
+  const [toUserKey, setToUserKey] = useState("");
 
   // On render set get accts from db and save to state to decouple from other useEffects
   useEffect(() => {
@@ -54,175 +54,170 @@ const TransferForm = ({ setModalOpen }) => {
     setUserOptions(userArr);
   }, [users]);
 
-
   useEffect(() => {
     const dbRef = ref(realtime);
 
-    onValue(dbRef, snapshot => {
+    onValue(dbRef, (snapshot) => {
       const users = snapshot.val();
 
-
       for (let user in users) {
-
-        if(users[user].name === capitalize(fromUserSelected)) {
+        if (users[user].name === capitalize(fromUserSelected)) {
           setFromUserKey(user);
         }
       }
-    })
-  }, [fromUserSelected]) 
+    });
+  }, [fromUserSelected]);
 
   useEffect(() => {
     const dbRef = ref(realtime);
 
-    onValue(dbRef, snapshot => {
+    onValue(dbRef, (snapshot) => {
       const users = snapshot.val();
 
-
       for (let user in users) {
-
-        if(users[user].name === capitalize(toUserSelected)) {
+        if (users[user].name === capitalize(toUserSelected)) {
           setToUserKey(user);
         }
       }
-    })
-  }, [toUserSelected]) 
+    });
+  }, [toUserSelected]);
 
-  
   const subtractFromAcct = () => {
-    if(!fromAmount) return;
+    if (!fromAmount) return;
 
     const acctRef = ref(realtime, fromUserKey);
 
-    let acctPath = '';
+    let acctPath = "";
 
-    onValue(acctRef, snapshot => {
+    onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
-      
+
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(fromUserAcctSelected);
-      })
+      });
 
       acctPath = `${fromUserKey}/accts/${acctIndex}/`;
-      console.log(acctPath);
-    })
-
+      
+    });
 
     const subtractRef = ref(realtime, acctPath);
 
-    onValue(subtractRef, snapshot => {
-      const targetAcct = snapshot.val();
-      console.log(targetAcct);
-      if (targetAcct.acctType === 'chequings/savings') {
-        const balance = targetAcct.acctBalance;
-        update(ref(realtime, acctPath), {
-          acctBalance: balance - fromAmount
-        })
-        console.log('cheq')
-      } else if (targetAcct.acctType === 'credit') {
-        const balance = targetAcct.acctSpent;
-        update(ref(realtime, acctPath), {
-          acctSpent: (+balance) + (+fromAmount)
-        })
-        console.log('credit')
+    onValue(
+      subtractRef,
+      (snapshot) => {
+        const targetAcct = snapshot.val();
+        
+        if (targetAcct.acctType === "chequings/savings") {
+          const balance = targetAcct.acctBalance;
+          update(ref(realtime, acctPath), {
+            acctBalance: balance - fromAmount,
+          });
+          
+        } else if (targetAcct.acctType === "credit") {
+          const balance = targetAcct.acctSpent;
+          update(ref(realtime, acctPath), {
+            acctSpent: +balance + +fromAmount,
+          });
+          
+        }
+      },
+      {
+        onlyOnce: true,
       }
-    }, {
-      onlyOnce: true
-    })
-  }
+    );
+  };
 
   const addToAcct = () => {
-    if(!fromAmount) return;
-    
+    if (!fromAmount) return;
+
     const acctRef = ref(realtime, toUserKey);
 
-    let acctPath = '';
+    let acctPath = "";
 
-    onValue(acctRef, snapshot => {
+    onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
-      
+
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(toUserAcctSelected);
-      })
+      });
 
       acctPath = `${toUserKey}/accts/${acctIndex}/`;
-      console.log(acctPath);
-    })
-
+      
+    });
 
     const subtractRef = ref(realtime, acctPath);
 
-    onValue(subtractRef, snapshot => {
-      const targetAcct = snapshot.val();
-      console.log(targetAcct);
-      if (targetAcct.acctType === 'chequings/savings') {
-        const balance = targetAcct.acctBalance;
-        update(ref(realtime, acctPath), {
-          acctBalance: (+balance) + (+fromAmount)
-        })
-        console.log('cheq')
-      } else if (targetAcct.acctType === 'credit') {
-        const balance = targetAcct.acctSpent;
-        update(ref(realtime, acctPath), {
-          acctSpent: balance - fromAmount
-        })
-        console.log('credit')
+    onValue(
+      subtractRef,
+      (snapshot) => {
+        const targetAcct = snapshot.val();
+        
+        if (targetAcct.acctType === "chequings/savings") {
+          const balance = targetAcct.acctBalance;
+          update(ref(realtime, acctPath), {
+            acctBalance: +balance + +fromAmount,
+          });
+          
+        } else if (targetAcct.acctType === "credit") {
+          const balance = targetAcct.acctSpent;
+          update(ref(realtime, acctPath), {
+            acctSpent: balance - fromAmount,
+          });
+          
+        }
+      },
+      {
+        onlyOnce: true,
       }
-    }, {
-      onlyOnce: true
-    })
-  }
+    );
+  };
 
   useEffect(() => {
     const exitModal = (e) => {
-      if(e.key === "Escape") {
+      if (e.key === "Escape") {
         setModalOpen(false);
       }
-    }
+    };
 
-    window.addEventListener('keydown', exitModal)
-    return () => window.removeEventListener('keydown', exitModal);
-  })
-
+    window.addEventListener("keydown", exitModal);
+    return () => window.removeEventListener("keydown", exitModal);
+  });
 
   const handleTransfer = (e) => {
     e.preventDefault();
     subtractFromAcct();
     addToAcct();
     setModalOpen(false);
-  }
-  
+  };
+
   // Set user to transfer FROM and retrieve that users accts
   const handleFromUserSelection = (e) => {
     setFromUserSelected(e.target.value);
-    
+
     retrieveUserAccts(e, setFromUserAccts);
   };
-  
+
   // Set user to transfer TO and retrieve that users accts
   const handleToUserSelection = (e) => {
     setToUserSelected(e.target.value);
-    
+
     retrieveUserAccts(e, setToUserAccts);
   };
-  
+
   const handleFromUserAcctSelection = (e) => {
     setFromUserAcctSelected(e.target.value);
   };
-  
+
   const handleToUserAcctSelection = (e) => {
     setToUserAcctSelected(e.target.value);
   };
-  
+
   const handleFromAmountChange = (e) => {
     setFromAmount(e.target.value);
   };
 
-
-
-  
-  
   return (
-    <form  onSubmit={handleTransfer} className={styles["transfer-form"]}>
+    <form onSubmit={handleTransfer} className={styles["transfer-form"]}>
       <h3 className={styles["form-heading"]}>Transfer</h3>
 
       <FromSet
@@ -249,7 +244,7 @@ const TransferForm = ({ setModalOpen }) => {
       />
 
       <div className={styles["btn-container"]}>
-        <BlackButton text="Confirm" type='submit'/>
+        <BlackButton text="Confirm" type="submit" />
       </div>
     </form>
   );

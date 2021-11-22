@@ -1,5 +1,12 @@
+.user-balance-card {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-top: var(--space-med);
+}
+
 .user-balance-list {
   list-style: none;
   width: 50vw;
-  margin-bottom: var(--space-lrg);
+  padding: var(--space-sml) 0;
 }

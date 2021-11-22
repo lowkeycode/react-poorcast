@@ -7,7 +7,7 @@ const AllUsersBalance = ({accts}) => {
 
 
   return (
-    <GreyCard>
+    <GreyCard className={styles['user-balance-card']}>
       <ul className={styles['user-balance-list']}>
         {
           accts.map((acct, i) => {

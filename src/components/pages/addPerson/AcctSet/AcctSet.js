@@ -33,7 +33,7 @@ const AcctSet = ({ getAcctInfo }) => {
     setAcctBalance(e.target.value);
   };
 
-  const saveAcct = (e) => {
+  const saveAcct = () => {
     getAcctInfo(acctName, acctType, acctSpent, acctLimit, acctBalance);
     setSavedAcct(true);
   };
