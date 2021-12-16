@@ -36,6 +36,8 @@ const BillsSet = ({hideBillAdd}) => {
       billPayOn
     }
 
+    console.log(billObj);
+
     const billsRef = ref(realtime, 'bills');
 
     push(billsRef, billObj)

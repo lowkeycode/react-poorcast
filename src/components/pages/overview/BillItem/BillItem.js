@@ -4,8 +4,20 @@ import styles from '../ListCard/ListCard.module.css';
 
 const BillItem = ({billInfo}) => {
 
-  const dueDate = new Date(billInfo.billDue);
-  const payOnDate = new Date(billInfo.billPayOn);
+  const formatDateArr = (date) => {
+    const dateArr = date.split('-');
+    dateArr[0] = parseInt(dateArr[0]);
+    dateArr[1] = dateArr[1] - 1;
+    dateArr[2] = parseInt(dateArr[2]);
+    return dateArr;
+  }
+
+  const jsDue = formatDateArr(billInfo.billDue);
+  const jsPayOn = formatDateArr(billInfo.billPayOn);
+
+  const dueDate = new Date(...jsDue);
+  const payOnDate = new Date(...jsPayOn);
+
 
   const dueMonth = new Intl.DateTimeFormat('en-us', {
     month: 'short'

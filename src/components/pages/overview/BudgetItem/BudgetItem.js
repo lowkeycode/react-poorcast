@@ -5,7 +5,17 @@ import styles from '../ListCard/ListCard.module.css';
 
 const BudgetItem = ({budgetInfo}) => {
 
-  const payOnDate = new Date(budgetInfo.budgetPayOn);
+  const formatDateArr = (date) => {
+    const dateArr = date.split('-');
+    dateArr[0] = parseInt(dateArr[0]);
+    dateArr[1] = dateArr[1] - 1;
+    dateArr[2] = parseInt(dateArr[2]);
+    return dateArr;
+  }
+
+  const jsPayOn = formatDateArr(budgetInfo.budgetPayOn)
+
+  const payOnDate = new Date(...jsPayOn);
 
   const payOnMonth = new Intl.DateTimeFormat('en-us', {
     month: 'short'
