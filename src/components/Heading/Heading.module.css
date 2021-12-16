@@ -8,7 +8,7 @@
 .heading__heading {
   font-size: var(--fs-med);
   text-transform: uppercase;
-  font-weight: 00;
+  font-weight: 600;
   letter-spacing: 1px;
   color: var(--color-grey-med);
 }

@@ -11,7 +11,7 @@ export const allAcctsBalance = (arr) => {
 
 
 export const retrieveUserAccts = (e, setStateFunc) => {
-  const dbRef = ref(realtime);
+  const dbRef = ref(realtime, 'users');
 
     onValue(dbRef, snapshot => {
       const users = snapshot.val();
@@ -50,7 +50,10 @@ export const retrieveUserAccts = (e, setStateFunc) => {
 }
 
 export const capitalize = (string) => {
-  return string.slice(0, 1).toUpperCase() + string.slice(1);
+  
+  return string.split(' ').map(word => {
+    return word.slice(0, 1).toUpperCase() + word.slice(1);
+  }).join(' ')
 }
 
 export const formatOrdinals = (n) => {

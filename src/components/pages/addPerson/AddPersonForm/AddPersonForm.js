@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ref, push} from "firebase/database";
 
 import realtime from '../../../../firebase/realtime';
+
 import GreyCard from '../../../UI/GreyCard/GreyCard';
 import AcctSet from '../AcctSet/AcctSet';
 import BlackButton from '../../../UI/BlackButton/BlackButton';
@@ -22,8 +23,8 @@ const AddPersonForm = () => {
     setUserAccts(newAccts);
   }
 
-  const addPersonSave = (e) => {
-    const dbRef = ref(realtime);
+  const addPersonSave = () => {
+    const dbRef = ref(realtime, 'users');
 
     push(dbRef, {
       name: userName,

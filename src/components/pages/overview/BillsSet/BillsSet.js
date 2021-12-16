@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { ref, push } from 'firebase/database';
+import realtime from '../../../../firebase/realtime';
 
 import styles from './BillsSet.module.css';
 import saveSvg from '../../../../img/checkmark-circle-outline.svg';
 
-const BillsSet = ({getBillInfo, hideBillAdd}) => {
+const BillsSet = ({hideBillAdd}) => {
 
   const [bill, setBill] = useState('');
   const [billDue, setBillDue] = useState({});
@@ -27,7 +29,18 @@ const BillsSet = ({getBillInfo, hideBillAdd}) => {
   }
 
   const saveBill = () => {
-    getBillInfo(bill, billDue, billAmount, billPayOn);
+    const billObj = {
+      bill,
+      billDue,
+      billAmount,
+      billPayOn
+    }
+
+    const billsRef = ref(realtime, 'bills');
+
+    push(billsRef, billObj)
+
+    // getBillInfo(bill, billDue, billAmount, billPayOn);
     hideBillAdd();
   }
 

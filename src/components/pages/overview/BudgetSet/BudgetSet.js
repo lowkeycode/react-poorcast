@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { ref, push } from 'firebase/database';
+import realtime from '../../../../firebase/realtime';
 
 import styles from './BudgetSet.module.css';
 import saveSvg from '../../../../img/checkmark-circle-outline.svg';
 
-const BudgetSet = ({getBudgetInfo, hideBudgetAdd}) => {
+const BudgetSet = ({hideBudgetAdd}) => {
 
   const [budgetPerson, setBudgetPerson] = useState({});
   const [budgetBill, setBudgetBill] = useState('');
@@ -27,7 +29,18 @@ const BudgetSet = ({getBudgetInfo, hideBudgetAdd}) => {
   }
 
   const saveBudget = () => {
-    getBudgetInfo( budgetPerson, budgetBill, budgetAmount, budgetPayOn);
+    
+    const budgetObj = {
+      budgetPerson,
+      budgetBill,
+      budgetAmount,
+      budgetPayOn
+    }
+
+    const billsRef = ref(realtime, 'budget');
+
+    push(billsRef, budgetObj)
+
     hideBudgetAdd();
   }
 

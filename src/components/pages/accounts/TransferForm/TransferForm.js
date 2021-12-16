@@ -29,14 +29,14 @@ const TransferForm = ({ setModalOpen }) => {
   const [fromUserKey, setFromUserKey] = useState("");
   const [toUserKey, setToUserKey] = useState("");
 
-  // On render set get accts from db and save to state to decouple from other useEffects
+  // On render get users from db and save to state to decouple from other useEffects
   useEffect(() => {
-    const dbRef = ref(realtime);
+    const dbRef = ref(realtime, 'users');
 
     onValue(dbRef, (snapshot) => {
-      const accts = snapshot.val();
+      const users = snapshot.val();
 
-      setUsers(accts);
+      setUsers(users);
     });
   }, []);
 
@@ -55,7 +55,7 @@ const TransferForm = ({ setModalOpen }) => {
   }, [users]);
 
   useEffect(() => {
-    const dbRef = ref(realtime);
+    const dbRef = ref(realtime, 'users');
 
     onValue(dbRef, (snapshot) => {
       const users = snapshot.val();
@@ -69,13 +69,14 @@ const TransferForm = ({ setModalOpen }) => {
   }, [fromUserSelected]);
 
   useEffect(() => {
-    const dbRef = ref(realtime);
+    const dbRef = ref(realtime, 'users');
 
     onValue(dbRef, (snapshot) => {
       const users = snapshot.val();
 
       for (let user in users) {
         if (users[user].name === capitalize(toUserSelected)) {
+          console.log('to user', user);
           setToUserKey(user);
         }
       }
@@ -85,18 +86,24 @@ const TransferForm = ({ setModalOpen }) => {
   const subtractFromAcct = () => {
     if (!fromAmount) return;
 
-    const acctRef = ref(realtime, fromUserKey);
+    const acctRef = ref(realtime, `users/${fromUserKey}`);
+
+    console.log(acctRef);
 
     let acctPath = "";
 
     onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
 
+      console.log(acct)
+
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(fromUserAcctSelected);
       });
 
-      acctPath = `${fromUserKey}/accts/${acctIndex}/`;
+      acctPath = `users/${fromUserKey}/accts/${acctIndex}/`;
+
+      console.log(acctPath);
       
     });
 
@@ -130,19 +137,24 @@ const TransferForm = ({ setModalOpen }) => {
   const addToAcct = () => {
     if (!fromAmount) return;
 
-    const acctRef = ref(realtime, toUserKey);
+    const acctRef = ref(realtime, `users/${toUserKey}`);
+
+    console.log('acct ref', acctRef);
 
     let acctPath = "";
 
     onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
 
+      console.log('acct', acct);
+      console.log(toUserAcctSelected);
+
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(toUserAcctSelected);
       });
 
-      acctPath = `${toUserKey}/accts/${acctIndex}/`;
-      
+      acctPath = `users/${toUserKey}/accts/${acctIndex}/`;
+      console.log(acctPath);
     });
 
     const subtractRef = ref(realtime, acctPath);
@@ -151,6 +163,8 @@ const TransferForm = ({ setModalOpen }) => {
       subtractRef,
       (snapshot) => {
         const targetAcct = snapshot.val();
+
+        console.log('target Acct', targetAcct);
         
         if (targetAcct.acctType === "chequings/savings") {
           const balance = targetAcct.acctBalance;

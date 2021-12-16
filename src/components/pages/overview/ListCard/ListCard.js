@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ref, onValue, set } from 'firebase/database';
+import realtime from '../../../../firebase/realtime';
 
 import GreyCard from '../../../UI/GreyCard/GreyCard';
 import BillsSet from '../BillsSet/BillsSet';
@@ -16,6 +18,38 @@ const ListCard = ({ title, headings }) => {
   const [billsArr, setBillsArr] = useState([]);
   const [budgetArr, setBudgetArr] = useState([]);
 
+  useEffect(() => {
+    const billsRef = ref(realtime, 'bills');
+
+    onValue(billsRef, snapshot => {
+      const bills = snapshot.val();
+
+      const formattedArr = [];
+
+      for(let bill in bills) {
+        formattedArr.push(bills[bill]);
+      }
+
+      setBillsArr(formattedArr)
+    })
+  }, [])
+
+  useEffect(() => {
+    const budgetRef = ref(realtime, 'budget');
+
+    onValue(budgetRef, snapshot => {
+      const budget = snapshot.val();
+
+      const formattedArr = [];
+
+      for(let budgetItem in budget) {
+        formattedArr.push(budget[budgetItem]);
+      }
+
+      setBudgetArr(formattedArr)
+    })
+  }, [])
+
   const showBillAdd = () => {
     setAddingBill(true)
   }
@@ -32,31 +66,6 @@ const ListCard = ({ title, headings }) => {
     setAddingBudget(false);
   }
 
-  const getBillInfo = (bill, billDue, billAmount, billPayOn) => {
-    const billObj = {
-      bill,
-      billDue,
-      billAmount,
-      billPayOn
-    }
-
-    const newBillsArr = [...billsArr, billObj]
-
-    setBillsArr(newBillsArr)
-  }
-
-  const getBudgetInfo = (budgetPerson, budgetBill, budgetAmount, budgetPayOn) => {
-    const budgetObj = {
-      budgetPerson,
-      budgetBill,
-      budgetAmount,
-      budgetPayOn
-    }
-
-    const newBudgetArr = [...budgetArr, budgetObj];
-
-    setBudgetArr(newBudgetArr);
-  }
   
   return (
     <GreyCard className={styles.card}>
@@ -75,10 +84,10 @@ const ListCard = ({ title, headings }) => {
         }
       </div>
       {
-        addingBill && <BillsSet billsArr={billsArr} getBillInfo={getBillInfo} hideBillAdd={hideBillAdd}/>
+        addingBill && <BillsSet billsArr={billsArr} hideBillAdd={hideBillAdd}/>
       }
       {
-        addingBudget && <BudgetSet budgetArr={budgetArr} getBudgetInfo={getBudgetInfo} hideBudgetAdd={hideBudgetAdd}/>
+        addingBudget && <BudgetSet budgetArr={budgetArr} hideBudgetAdd={hideBudgetAdd}/>
       }
       <ul className={styles.list}>
         <li className={styles['list__headings']}>

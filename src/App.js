@@ -15,7 +15,7 @@ function App() {
 
   // Get all user info on page load
   useEffect(() => {
-    const dbRef = ref(realtime);
+    const dbRef = ref(realtime, 'users');
 
     onValue(dbRef, (snapshot) => {
       const usersSnapshot = snapshot.val();
