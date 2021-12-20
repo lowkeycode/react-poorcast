@@ -1,8 +1,8 @@
 import styles from './Overlay.module.css';
 
-const Overlay = () => {
+const Overlay = ({setModalOpen}) => {
   return (
-    <div className={styles.overlay}/>
+    <div className={styles.overlay} onClick={()=> setModalOpen(false)}/>
   )
 }
 

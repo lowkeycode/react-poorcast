@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ref, push } from 'firebase/database';
+
 import realtime from '../../../../firebase/realtime';
+import { capitalize } from '../../../../utils/utils';
 
 import styles from './BudgetSet.module.css';
 import saveSvg from '../../../../img/checkmark-circle-outline.svg';
@@ -31,8 +33,8 @@ const BudgetSet = ({hideBudgetAdd}) => {
   const saveBudget = () => {
     
     const budgetObj = {
-      budgetPerson,
-      budgetBill,
+      budgetPerson: capitalize(budgetPerson),
+      budgetBill: capitalize(budgetBill),
       budgetAmount,
       budgetPayOn
     }

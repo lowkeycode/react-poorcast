@@ -1,19 +1,25 @@
-import GreyCard from '../GreyCard/GreyCard';
-import Overlay from '../Overlay/Overlay';
-import TransferForm from '../../pages/accounts/TransferForm/TransferForm';
+import ReactDOM from "react-dom";
 
-import styles from './Modal.module.css';
+import GreyCard from "../GreyCard/GreyCard";
+import Overlay from "../Overlay/Overlay";
+import TransferForm from "../../pages/accounts/TransferForm/TransferForm";
 
-const Modal = ({setModalOpen}) => {
+import styles from "./Modal.module.css";
+
+const portalEl = document.getElementById("overlays");
+
+const Modal = ({ setModalOpen }) => {
   return (
     <>
-      <Overlay/>
-      <GreyCard className={styles.card}>
-        <TransferForm setModalOpen={setModalOpen}/>
-      </GreyCard>
+      {ReactDOM.createPortal(<Overlay setModalOpen={setModalOpen}/>, portalEl)}
+      {ReactDOM.createPortal(
+        <GreyCard className={styles.card}>
+          <TransferForm setModalOpen={setModalOpen} />
+        </GreyCard>,
+        portalEl
+      )}
     </>
-    
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

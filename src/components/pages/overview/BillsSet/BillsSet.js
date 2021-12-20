@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ref, push } from 'firebase/database';
+
 import realtime from '../../../../firebase/realtime';
+import { capitalize } from '../../../../utils/utils';
 
 import styles from './BillsSet.module.css';
 import saveSvg from '../../../../img/checkmark-circle-outline.svg';
@@ -10,7 +12,6 @@ const BillsSet = ({hideBillAdd}) => {
   const [bill, setBill] = useState('');
   const [billDue, setBillDue] = useState({});
   const [billAmount, setBillAmount] = useState(0);
-  const [billPayOn, setPayBillOn] = useState({});
 
   const handleBillChange = (e) => {
     setBill(e.target.value);
@@ -24,16 +25,13 @@ const BillsSet = ({hideBillAdd}) => {
     setBillAmount(e.target.value);
   }
 
-  const handleBillPayOn = (e) => {
-    setPayBillOn(e.target.value);
-  }
+
 
   const saveBill = () => {
     const billObj = {
-      bill,
+      bill: capitalize(bill),
       billDue,
       billAmount,
-      billPayOn
     }
 
     console.log(billObj);
@@ -42,7 +40,6 @@ const BillsSet = ({hideBillAdd}) => {
 
     push(billsRef, billObj)
 
-    // getBillInfo(bill, billDue, billAmount, billPayOn);
     hideBillAdd();
   }
 
@@ -75,10 +72,6 @@ const BillsSet = ({hideBillAdd}) => {
           <input onChange={handleBillAmount} type="number" required/>
         </div>
 
-        <div>
-          <label htmlFor="pay-on">Pay On</label>
-          <input onChange={handleBillPayOn} type="date" required/>
-        </div>
       </fieldset>
     </form>
   )

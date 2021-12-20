@@ -3,6 +3,7 @@ import { ref, push} from "firebase/database";
 import { Navigate } from 'react-router-dom';
 
 import realtime from '../../../../firebase/realtime';
+import { capitalize } from '../../../../utils/utils';
 
 import GreyCard from '../../../UI/GreyCard/GreyCard';
 import AcctSet from '../AcctSet/AcctSet';
@@ -31,7 +32,7 @@ const AddPersonForm = () => {
     const dbRef = ref(realtime, 'users');
 
     push(dbRef, {
-      name: userName,
+      name: capitalize(userName),
       accts: accts
     });
 
@@ -45,7 +46,7 @@ const AddPersonForm = () => {
   const getAcctInfo = (acctName, acctType, acctSpent, acctLimit, acctBalance) => {
     
     const acctObj = {
-      acctName,
+      acctName: capitalize(acctName),
       acctType,
       acctSpent,
       acctLimit,

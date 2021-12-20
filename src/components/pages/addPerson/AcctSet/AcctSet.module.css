@@ -23,9 +23,9 @@
 
 .saved {
    align-self: center;
-   border: 2px solid var(--color-grey-dark);
+   border: 1px solid var(--color-grey-dark);
    padding: .2rem var(--space-xs);
    border-radius: var(--br-sml);
    background: var(--color-green-light);
-   font-weight: 300;
+   font-weight: 400;
 }

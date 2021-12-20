@@ -6,7 +6,7 @@ import ListCard from '../ListCard/ListCard';
 import styles from './Overview.module.css';
 
 const Overview = ({accts}) => {
-  const billsHeadings = ['Bill', 'Due', 'Amount', 'Pay On'];
+  const billsHeadings = ['Bill', 'Due', 'Amount'];
 
   const budgetHeadings = ['Person', 'Bill', 'Amount', 'Pay On'];
 

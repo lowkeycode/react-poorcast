@@ -32,7 +32,6 @@ const BudgetItem = ({budgetInfo}) => {
       <p>{budgetInfo.budgetBill}</p>
       <p>${budgetInfo.budgetAmount}</p>
       <p>{`${payOnMonth} ${formatOrdinals(payOnDay)}`}</p>
-      
     </li>
   )
 }

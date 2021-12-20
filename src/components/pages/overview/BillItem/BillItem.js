@@ -13,10 +13,8 @@ const BillItem = ({billInfo}) => {
   }
 
   const jsDue = formatDateArr(billInfo.billDue);
-  const jsPayOn = formatDateArr(billInfo.billPayOn);
 
   const dueDate = new Date(...jsDue);
-  const payOnDate = new Date(...jsPayOn);
 
 
   const dueMonth = new Intl.DateTimeFormat('en-us', {
@@ -27,13 +25,7 @@ const BillItem = ({billInfo}) => {
     day: 'numeric'
   }).format(dueDate);
 
-  const payOnMonth = new Intl.DateTimeFormat('en-us', {
-    month: 'short'
-  }).format(payOnDate);
 
-  const payOnDay = new Intl.DateTimeFormat('en-us', {
-    day: 'numeric'
-  }).format(payOnDate);
 
   
   return (
@@ -41,7 +33,6 @@ const BillItem = ({billInfo}) => {
       <p>{billInfo.bill}</p>
       <p>{`${dueMonth} ${formatOrdinals(dueDay)}`}</p>
       <p>${billInfo.billAmount}</p>
-      <p>{`${payOnMonth} ${formatOrdinals(payOnDay)}`}</p>
     </li>
   )
 }
