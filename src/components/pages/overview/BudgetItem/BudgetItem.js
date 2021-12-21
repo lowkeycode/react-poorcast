@@ -1,6 +1,10 @@
+import { ref, remove } from 'firebase/database';
+
+import realtime from '../../../../firebase/realtime';
 import { formatOrdinals } from '../../../../utils/utils';
 
 import styles from '../ListCard/ListCard.module.css';
+import deleteSvg from '../../../../img/close-circle-outline.svg';
 
 
 const BudgetItem = ({budgetInfo}) => {
@@ -25,6 +29,12 @@ const BudgetItem = ({budgetInfo}) => {
     day: 'numeric'
   }).format(payOnDate);
 
+  const deleteBudgetItem = () => {
+    const budgetItemTarget = ref(realtime, `budget/${budgetInfo.key}`)
+
+    remove(budgetItemTarget);
+  }
+
 
   return (
     <li className={styles['list__item']}>
@@ -32,6 +42,9 @@ const BudgetItem = ({budgetInfo}) => {
       <p>{budgetInfo.budgetBill}</p>
       <p>${budgetInfo.budgetAmount}</p>
       <p>{`${payOnMonth} ${formatOrdinals(payOnDay)}`}</p>
+      <button className={styles.delete} onClick={deleteBudgetItem}>
+        <img src={deleteSvg} alt="Delete item"/>
+      </button>
     </li>
   )
 }

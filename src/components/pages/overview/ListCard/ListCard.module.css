@@ -73,13 +73,13 @@
 
 .delete {
   width: 1.2rem;
+  position: absolute;
+  right: var(--space-sml);
   display: flex;
   justify-content: center;align-items: center;
   border: none;
   background: transparent;
-
-  position: absolute;
-  right: var(--space-sml);
+  cursor: pointer;
 }
 
 .delete img {

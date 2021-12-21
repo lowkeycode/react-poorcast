@@ -1,3 +1,6 @@
+import { ref, remove } from 'firebase/database';
+
+import realtime from '../../../../firebase/realtime';
 import { formatOrdinals } from '../../../../utils/utils';
 
 import styles from '../ListCard/ListCard.module.css';
@@ -27,14 +30,18 @@ const BillItem = ({billInfo}) => {
   }).format(dueDate);
 
 
+  const deleteBillItem = () => {
+    const billItemTarget = ref(realtime, `bills/${billInfo.key}`)
 
+    remove(billItemTarget);
+  }
   
   return (
     <li className={styles['list__item']}>
       <p>{billInfo.bill}</p>
       <p>{`${dueMonth} ${formatOrdinals(dueDay)}`}</p>
       <p>${billInfo.billAmount}</p>
-      <button className={styles.delete}>
+      <button className={styles.delete} onClick={deleteBillItem}>
         <img src={deleteSvg} alt="Delete item"/>
       </button>
     </li>
