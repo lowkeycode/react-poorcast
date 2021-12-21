@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ref, onValue, set } from 'firebase/database';
+import { ref, onValue } from 'firebase/database';
 import realtime from '../../../../firebase/realtime';
 
 import GreyCard from '../../../UI/GreyCard/GreyCard';

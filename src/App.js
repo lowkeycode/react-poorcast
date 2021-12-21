@@ -13,6 +13,7 @@ function App() {
   const [formattedAccts, setFormattedAccts] = useState([]);
   const [transferModalOpen, setTransferModalOpen] = useState(false);
 
+
   // Get all user info on page load
   useEffect(() => {
     const dbRef = ref(realtime, 'users');
@@ -44,73 +45,6 @@ function App() {
   const onTransferModalOpen = () => {
     setTransferModalOpen(true);
   };
-
-  // const user = {
-  //   name: "Cameron",
-  //   accts: [
-  //     {
-  //       acctName: "Chequings",
-  //       acctBalance: 1000,
-  //       acctType: 'chequings/savings'
-  //     },
-  //     {
-  //       acctName: "Visa Green",
-  //       acctBalance: 1000,
-  //       acctLimit: 3000,
-  //       acctType: 'credit'
-  //     },
-  //     {
-  //       acctName: "Line Of Credit",
-  //       acctBalance: 1000,
-  //       acctLimit: 3000,
-  //       acctType: 'credit'
-  //     },
-  //     {
-  //       acctName: "Line Of Credit",
-  //       acctBalance: 1000,
-  //       acctLimit: 3000,
-  //       acctType: 'credit'
-  //     },
-  //   ],
-  //   expenses: [
-  //     {
-  //       label: "January",
-  //     },
-  //     {
-  //       label: 'February'
-  //     },
-  //     {
-  //       label: 'March'
-  //     },
-  //     {
-  //       label: 'April'
-  //     },
-  //     {
-  //       label: 'May'
-  //     },
-  //     {
-  //       label: 'June'
-  //     },
-  //     {
-  //       label: 'July'
-  //     },
-  //     {
-  //       label: 'August'
-  //     },
-  //     {
-  //       label: 'September'
-  //     },
-  //     {
-  //       label: 'October'
-  //     },
-  //     {
-  //       label: 'November'
-  //     },
-  //     {
-  //       label: 'December'
-  //     },
-  //   ],
-  // };
 
   return (
     <Router>
