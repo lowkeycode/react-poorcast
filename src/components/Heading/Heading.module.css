@@ -14,5 +14,7 @@
 }
 
 .heading__month {
+  font-weight: 500;
   font-size: var(--fs-sml);
+  color: var(--color-blue-dark)
 }

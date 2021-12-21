@@ -9,6 +9,13 @@ export const allAcctsBalance = (arr) => {
   }, 0);
 }
 
+export const capitalize = (string) => {
+  
+  return string.split(' ').map(word => {
+    return word.slice(0, 1).toUpperCase() + word.slice(1);
+  }).join(' ')
+}
+
 
 export const retrieveUserAccts = (e, setStateFunc) => {
   const dbRef = ref(realtime, 'users');
@@ -16,11 +23,12 @@ export const retrieveUserAccts = (e, setStateFunc) => {
     onValue(dbRef, snapshot => {
       const users = snapshot.val();
 
-      const lowerCasedUser = e.target.value;
+      const selectedUser = e.target.value;
 
-      const capitalizeUser = lowerCasedUser.slice(0, 1).toUpperCase() + lowerCasedUser.slice(1);
+      const capitalizeUser = capitalize(selectedUser);
       
-      // console.log(capitalizeUser);
+      console.log(capitalizeUser);
+      console.log(users);
 
       let foundUserAccts;
       let formattedAccts = [];
@@ -49,12 +57,7 @@ export const retrieveUserAccts = (e, setStateFunc) => {
     })
 }
 
-export const capitalize = (string) => {
-  
-  return string.split(' ').map(word => {
-    return word.slice(0, 1).toUpperCase() + word.slice(1);
-  }).join(' ')
-}
+
 
 export const formatOrdinals = (n) => {
 
