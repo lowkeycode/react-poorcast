@@ -1,9 +1,10 @@
-import realtime from "../../../../firebase/realtime";
 import { onValue, ref, update } from "firebase/database";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
+import realtime from "../../../../firebase/realtime";
 import { retrieveUserAccts, capitalize } from "../../../../utils/utils";
 
+import UsersContext from "../../../../store/users-context";
 import BlackButton from "../../../UI/BlackButton/BlackButton";
 import FromSet from "../FromSet/FromSet";
 import ToSet from "../ToSet/ToSet";
@@ -11,7 +12,9 @@ import ToSet from "../ToSet/ToSet";
 import styles from "./TransferForm.module.css";
 import rightArrow from "../../../../img/arrow-forward-outline.svg";
 
-const TransferForm = ({ setModalOpen }) => {
+const TransferForm = () => {
+  const usersCtx = useContext(UsersContext);
+
   const [users, setUsers] = useState([]);
   const [userOptions, setUserOptions] = useState([]);
 
@@ -189,7 +192,7 @@ const TransferForm = ({ setModalOpen }) => {
   useEffect(() => {
     const exitModal = (e) => {
       if (e.key === "Escape") {
-        setModalOpen(false);
+        usersCtx.setModalOpen(false);
       }
     };
 
@@ -201,7 +204,7 @@ const TransferForm = ({ setModalOpen }) => {
     e.preventDefault();
     subtractFromAcct();
     addToAcct();
-    setModalOpen(false);
+    usersCtx.setTransferModalOpen(false);
   };
 
   // Set user to transfer FROM and retrieve that users accts

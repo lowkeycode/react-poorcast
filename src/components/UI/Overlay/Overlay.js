@@ -1,8 +1,15 @@
+import { useContext } from 'react';
+
+import UsersContext from '../../../store/users-context';
+
 import styles from './Overlay.module.css';
 
-const Overlay = ({setModalOpen}) => {
+const Overlay = () => {
+
+const usersCtx = useContext(UsersContext);
+
   return (
-    <div className={styles.overlay} onClick={()=> setModalOpen(false)}/>
+    <div className={styles.overlay} onClick={()=> usersCtx.setTransferModalOpen(false)}/>
   )
 }
 

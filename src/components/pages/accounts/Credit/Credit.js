@@ -5,7 +5,7 @@ const Credit = ({ acctInfo }) => {
     <div className={styles.account}>
       <h3 className={styles["account__heading"]}>{acctInfo.acctName}</h3>
       <div className={styles["account__total"]}>
-        <p>Total</p>
+        <p>Spent</p>
         <p className={styles["account__balance"]}>
           <span>$</span>
           {acctInfo.acctSpent}/<span>$</span>
