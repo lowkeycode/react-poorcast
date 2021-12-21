@@ -1,6 +1,7 @@
 import { formatOrdinals } from '../../../../utils/utils';
 
 import styles from '../ListCard/ListCard.module.css';
+import deleteSvg from '../../../../img/close-circle-outline.svg';
 
 const BillItem = ({billInfo}) => {
 
@@ -33,6 +34,9 @@ const BillItem = ({billInfo}) => {
       <p>{billInfo.bill}</p>
       <p>{`${dueMonth} ${formatOrdinals(dueDay)}`}</p>
       <p>${billInfo.billAmount}</p>
+      <button className={styles.delete}>
+        <img src={deleteSvg} alt="Delete item"/>
+      </button>
     </li>
   )
 }

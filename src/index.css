@@ -241,17 +241,17 @@ template {
 
 :root {
   --color-red-dark: #db331e;
-  --color-red-light: #e65846;
+  --color-red-light: #ffd0cf;
 
-  --color-yellow-dark: #faed51;
-  --color-yellow-light: #fbf283;
+  --color-orange-dark: #CD874B;
+  --color-orange-light: #ffeee0;
 
   --color-blue-dark: #7cb7b7;
   --color-blue-med: #bedbdb;
   --color-blue-light: #f5f9f9;
 
   --color-green-dark: #3ba13f;
-  --color-green-light: #50bf54;
+  --color-green-light: #def4e0;
 
   --color-grey-dark: #2b2b2b;
   --color-grey-med: #757575;
