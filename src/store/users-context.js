@@ -1,26 +1,23 @@
 import { createContext, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 
-
 import realtime from "../firebase/realtime";
 
 const UsersContext = createContext({
   users: [],
   formattedAccts: [],
   transferModalOpen: false,
-  onTransferModalOpen: () => {}
-})
+  onTransferModalOpen: () => {},
+});
 
 export const UsersContextProvider = ({ children }) => {
-
   const [users, setUsers] = useState([]);
   const [formattedAccts, setFormattedAccts] = useState([]);
   const [transferModalOpen, setTransferModalOpen] = useState(false);
 
-
   // Get all user info on page load
   useEffect(() => {
-    const dbRef = ref(realtime, 'users');
+    const dbRef = ref(realtime, "users");
 
     onValue(dbRef, (snapshot) => {
       const usersSnapshot = snapshot.val();
@@ -46,20 +43,18 @@ export const UsersContextProvider = ({ children }) => {
     setFormattedAccts(userAccts);
   }, [users]);
 
-  
-
-
   return (
-    <UsersContext.Provider value={{
-      users: users,
-      formattedAccts: formattedAccts,
-      transferModalOpen: transferModalOpen,
-      setTransferModalOpen: setTransferModalOpen,
-    }}>
+    <UsersContext.Provider
+      value={{
+        users: users,
+        formattedAccts: formattedAccts,
+        transferModalOpen: transferModalOpen,
+        setTransferModalOpen: setTransferModalOpen,
+      }}
+    >
       {children}
     </UsersContext.Provider>
-  )
-}
-
+  );
+};
 
 export default UsersContext;
