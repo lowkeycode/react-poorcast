@@ -27,12 +27,17 @@ const ListCard = ({ title, headings }) => {
       const formattedArr = [];
 
       for(let bill in bills) {
-        formattedArr.push(bills[bill]);
+        formattedArr.push({
+          key: bill,
+          ...bills[bill]
+        });
       }
 
       setBillsArr(formattedArr)
     })
   }, [])
+
+  console.log(billsArr);
 
   useEffect(() => {
     const budgetRef = ref(realtime, 'budget');
@@ -43,12 +48,18 @@ const ListCard = ({ title, headings }) => {
       const formattedArr = [];
 
       for(let budgetItem in budget) {
-        formattedArr.push(budget[budgetItem]);
+        formattedArr.push({
+          key: budgetItem,
+          ...budget[budgetItem]
+        });
       }
 
       setBudgetArr(formattedArr)
     })
+    
   }, [])
+
+  console.log(budgetArr);
 
   const showBillAdd = () => {
     setAddingBill(true)
