@@ -5,7 +5,7 @@ import ListCard from '../ListCard/ListCard';
 
 import styles from './Overview.module.css';
 
-const Overview = ({accts}) => {
+const Overview = () => {
   const billsHeadings = ['Bill', 'Due', 'Amount'];
 
   const budgetHeadings = ['Person', 'Bill', 'Amount', 'Pay On'];
@@ -14,7 +14,7 @@ const Overview = ({accts}) => {
     <div className={styles.overview}>
       <Sidebar/>
       <Main>
-        <AllUsersBalance accts={accts}/>
+        <AllUsersBalance/>
         <ListCard title='Bills' headings={billsHeadings}/>
         <ListCard title='Budget' headings={budgetHeadings}/>
       </Main>

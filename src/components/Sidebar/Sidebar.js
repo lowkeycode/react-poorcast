@@ -4,12 +4,12 @@ import Settings from './Settings';
 
 import styles from './Sidebar.module.css';
 
-const Sidebar = ({openTransferModal}) => {
+const Sidebar = () => {
 
   return (
     <aside className={styles.sidebar}>
       <Logo/>
-      <Nav openTransferModal={openTransferModal}/>
+      <Nav />
       <Settings/>
     </aside>
   )

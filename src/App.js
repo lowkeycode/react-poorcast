@@ -1,74 +1,27 @@
-import realtime from "./firebase/realtime";
-import { ref, onValue } from "firebase/database";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
 
+import { UsersContextProvider } from "./store/users-context";
 import Accounts from "./components/pages/accounts/Accounts/Accounts";
 import Overview from "./components/pages/overview/Overview/Overview";
 import AddPerson from "./components/pages/addPerson/AddPerson/AddPerson";
 import Settings from "./components/pages/settings/Settings/Settings";
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [formattedAccts, setFormattedAccts] = useState([]);
-  const [transferModalOpen, setTransferModalOpen] = useState(false);
-
-
-  // Get all user info on page load
-  useEffect(() => {
-    const dbRef = ref(realtime, 'users');
-
-    onValue(dbRef, (snapshot) => {
-      const usersSnapshot = snapshot.val();
-
-      setUsers(usersSnapshot);
-    });
-  }, []);
-
-  // After users have loaded, format each user with accounts for accounts page
-  useEffect(() => {
-    let userAccts = [];
-
-    for (let user in users) {
-      const formattedAcct = {
-        key: user,
-        name: users[user].name,
-        accts: users[user].accts,
-      };
-
-      userAccts = [...userAccts, formattedAcct];
-    }
-
-    setFormattedAccts(userAccts);
-  }, [users]);
-
-  const onTransferModalOpen = () => {
-    setTransferModalOpen(true);
-  };
 
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Overview accts={formattedAccts} />} />
+    <UsersContextProvider>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Overview />} />
 
-        <Route
-          exact
-          path="/accounts"
-          element={
-            <Accounts
-              accts={formattedAccts}
-              modalOpen={transferModalOpen}
-              setModalOpen={setTransferModalOpen}
-              openTransferModal={onTransferModalOpen}
-            />
-          }
-        />
+          <Route exact path="/accounts" element={<Accounts />} />
 
-        <Route exact path="/addPerson" element={<AddPerson />} />
+          <Route exact path="/addPerson" element={<AddPerson />} />
 
-        <Route exact path="/settings" element={<Settings />} />
-      </Routes>
-    </Router>
+          <Route exact path="/settings" element={<Settings />} />
+        </Routes>
+      </Router>
+    </UsersContextProvider>
   );
 }
 

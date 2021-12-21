@@ -8,13 +8,13 @@ import styles from "./Modal.module.css";
 
 const portalEl = document.getElementById("overlays");
 
-const Modal = ({ setModalOpen }) => {
+const Modal = () => {
   return (
     <>
-      {ReactDOM.createPortal(<Overlay setModalOpen={setModalOpen}/>, portalEl)}
+      {ReactDOM.createPortal(<Overlay />, portalEl)}
       {ReactDOM.createPortal(
         <GreyCard className={styles.card}>
-          <TransferForm setModalOpen={setModalOpen} />
+          <TransferForm />
         </GreyCard>,
         portalEl
       )}
