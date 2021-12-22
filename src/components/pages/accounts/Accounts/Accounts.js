@@ -28,7 +28,11 @@ const Accounts = () => {
           })
         }
 
-        {overlaysCtx.transferModalOpen && <Modal />}
+        {
+          overlaysCtx.transferModalOpen && <Modal type='transfer' />
+        }
+
+        
       </Main>
     </div>
   );

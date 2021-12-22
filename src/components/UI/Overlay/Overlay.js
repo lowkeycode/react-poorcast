@@ -9,7 +9,10 @@ const Overlay = () => {
 const overlaysCtx = useContext(OverlaysContext);
 
   return (
-    <div className={styles.overlay} onClick={()=> overlaysCtx.setTransferModalOpen(false)}/>
+    <div className={styles.overlay} onClick={()=>{
+      overlaysCtx.setTransferModalOpen(false);
+      overlaysCtx.setPayBillModalOpen(false);
+    }}/>
   )
 }
 

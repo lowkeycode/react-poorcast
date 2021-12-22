@@ -19,8 +19,8 @@ const AcctsNav = () => {
         <p className={styles['icon-description']}>Budget</p>
       </li> 
       <li className={styles['nav__links--link']}>
-        <button className={styles.transfer}>
-          <img onClick={() => overlaysCtx.setTransferModalOpen(true)} src={transferSvg} alt="Link to transfer between accounts"/>
+        <button onClick={() => overlaysCtx.setTransferModalOpen(true)} className={styles.transfer}>
+          <img src={transferSvg} alt="Link to transfer between accounts"/>
         </button>
         <p className={styles['icon-description']}>Transfer</p>
       </li>
