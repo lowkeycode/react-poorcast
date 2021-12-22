@@ -44,7 +44,8 @@
   opacity: 1;
 }
 
-.transfer {
+.transfer,
+.pay-bill {
   border: none;
   background: transparent;
   cursor: pointer;

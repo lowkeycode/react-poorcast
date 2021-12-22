@@ -189,16 +189,7 @@ const TransferForm = () => {
     );
   };
 
-  useEffect(() => {
-    const exitModal = (e) => {
-      if (e.key === "Escape") {
-        overlaysCtx.setTransferModalOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", exitModal);
-    return () => window.removeEventListener("keydown", exitModal);
-  });
+  
 
   const handleTransfer = (e) => {
     e.preventDefault();
