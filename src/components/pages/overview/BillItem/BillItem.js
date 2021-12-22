@@ -5,6 +5,7 @@ import { formatOrdinals } from '../../../../utils/utils';
 
 import styles from '../ListCard/ListCard.module.css';
 import deleteSvg from '../../../../img/close-circle-outline.svg';
+import paidSvg from '../../../../img/paid.svg';
 
 const BillItem = ({billInfo}) => {
 
@@ -35,12 +36,18 @@ const BillItem = ({billInfo}) => {
 
     remove(billItemTarget);
   }
+
+  //  * PAID Element
+  // <div className={styles.paid}>
+  //   <img src={paidSvg} alt="Paid stamp"/>
+  // </div>
   
   return (
     <li className={styles['list__item']}>
       <p>{billInfo.bill}</p>
       <p>{`${dueMonth} ${formatOrdinals(dueDay)}`}</p>
       <p>${billInfo.billAmount}</p>
+      
       <button className={styles.delete} onClick={deleteBillItem}>
         <img src={deleteSvg} alt="Delete item"/>
       </button>
