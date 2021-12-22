@@ -14,7 +14,7 @@ const Overview = () => {
 
   const overlaysCtx = useContext(OverlaysContext);
 
-  const billsHeadings = ['Bill', 'Due', 'Amount'];
+  const billsHeadings = ['Bill', 'Due', 'Amount', 'Owing'];
 
   const budgetHeadings = ['Person', 'Bill', 'Amount', 'Pay On'];
 
