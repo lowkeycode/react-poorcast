@@ -32,6 +32,7 @@ const BillsSet = ({hideBillAdd}) => {
       bill: capitalize(bill),
       billDue,
       billAmount,
+      billOwing: billAmount
     }
 
     console.log(billObj);

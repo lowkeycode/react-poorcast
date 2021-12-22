@@ -47,6 +47,7 @@ const BillItem = ({billInfo}) => {
       <p>{billInfo.bill}</p>
       <p>{`${dueMonth} ${formatOrdinals(dueDay)}`}</p>
       <p>${billInfo.billAmount}</p>
+      <p>${billInfo.billOwing}</p>
       
       <button className={styles.delete} onClick={deleteBillItem}>
         <img src={deleteSvg} alt="Delete item"/>
