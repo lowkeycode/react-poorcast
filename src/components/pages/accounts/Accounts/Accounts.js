@@ -1,6 +1,8 @@
 import { useContext } from "react";
 
 import UsersContext from "../../../../store/users-context";
+import OverlaysContext from "../../../../store/overlays-context";
+
 import Sidebar from "../../../Sidebar/Sidebar";
 import Main from "../../../Main/Main";
 import AddPersonBtn from "../AddPersonBtn/AddPersonBtn";
@@ -12,7 +14,7 @@ import styles from "./Accounts.module.css";
 const Accounts = () => {
 
   const usersCtx = useContext(UsersContext);
-  console.log(usersCtx.transferModalOpen);
+  const overlaysCtx = useContext(OverlaysContext);
 
 
   return (
@@ -26,7 +28,7 @@ const Accounts = () => {
           })
         }
 
-        {usersCtx.transferModalOpen && <Modal />}
+        {overlaysCtx.transferModalOpen && <Modal />}
       </Main>
     </div>
   );

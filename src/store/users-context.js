@@ -6,13 +6,11 @@ import realtime from "../firebase/realtime";
 const UsersContext = createContext({
   users: [],
   formattedAccts: [],
-  transferModalOpen: false,
 });
 
 export const UsersContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [formattedAccts, setFormattedAccts] = useState([]);
-  const [transferModalOpen, setTransferModalOpen] = useState(false);
 
   // Get all user info on page load
   useEffect(() => {
@@ -47,8 +45,6 @@ export const UsersContextProvider = ({ children }) => {
       value={{
         users: users,
         formattedAccts: formattedAccts,
-        transferModalOpen: transferModalOpen,
-        setTransferModalOpen: setTransferModalOpen,
       }}
     >
       {children}

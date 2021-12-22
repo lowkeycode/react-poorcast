@@ -3,8 +3,8 @@ import { useState, useEffect, useContext } from "react";
 
 import realtime from "../../../../firebase/realtime";
 import { retrieveUserAccts, capitalize } from "../../../../utils/utils";
+import OverlaysContext from "../../../../store/overlays-context";
 
-import UsersContext from "../../../../store/users-context";
 import BlackButton from "../../../UI/BlackButton/BlackButton";
 import FromSet from "../FromSet/FromSet";
 import ToSet from "../ToSet/ToSet";
@@ -13,7 +13,7 @@ import styles from "./TransferForm.module.css";
 import rightArrow from "../../../../img/arrow-forward-outline.svg";
 
 const TransferForm = () => {
-  const usersCtx = useContext(UsersContext);
+  const overlaysCtx = useContext(OverlaysContext);
 
   const [users, setUsers] = useState([]);
   const [userOptions, setUserOptions] = useState([]);
@@ -192,7 +192,7 @@ const TransferForm = () => {
   useEffect(() => {
     const exitModal = (e) => {
       if (e.key === "Escape") {
-        usersCtx.setTransferModalOpen(false);
+        overlaysCtx.setTransferModalOpen(false);
       }
     };
 
@@ -204,7 +204,7 @@ const TransferForm = () => {
     e.preventDefault();
     subtractFromAcct();
     addToAcct();
-    usersCtx.setTransferModalOpen(false);
+    overlaysCtx.setTransferModalOpen(false);
   };
 
   // Set user to transfer FROM and retrieve that users accts

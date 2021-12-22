@@ -6,14 +6,17 @@ const OverlaysContext = createContext({
 });
 
 
-export const OverLaysContextProvider = ({children}) => {
+export const OverlaysContextProvider = ({children}) => {
 
   const [transferModalOpen, setTransferModalOpen] = useState(false);
-  const [payBillModalOpen, setpayBillModalOpen] = useState(false);
+  const [payBillModalOpen, setPayBillModalOpen] = useState(false);
 
   return (
     <OverlaysContext.Provider value={{
-      
+      transferModalOpen,
+      setTransferModalOpen,
+      payBillModalOpen,
+      setPayBillModalOpen
     }}>
       {children}
     </OverlaysContext.Provider>
