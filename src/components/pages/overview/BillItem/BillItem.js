@@ -37,6 +37,7 @@ const BillItem = ({billInfo}) => {
     remove(billItemTarget);
   }
 
+
   //  * PAID Element
   // <div className={styles.paid}>
   //   <img src={paidSvg} alt="Paid stamp"/>

@@ -32,6 +32,7 @@ const PayBillForm = () => {
 
   const [bills, setBills] = useState([]);
   const [billOptions, setBillOptions] = useState([]);
+  const [billSelected, setBillSelected] = useState('placeholder')
   const [payAmount, setPayAmount] = useState(0);
 
   useEffect(() => {
@@ -135,6 +136,9 @@ const PayBillForm = () => {
     if(!fromAmount || !payAmount) return;
   }
 
+  console.log(billSelected);
+
+
   const handleFromUserSelection = (e) => {
     setFromUserSelected(e.target.value);
 
@@ -148,6 +152,10 @@ const PayBillForm = () => {
   const handleFromAmountChange = (e) => {
     setFromAmount(e.target.value);
   };
+
+  const handleBillSelection = (e) => {
+    setBillSelected(e.target.value);
+  }
 
   const handlePayAmountChange = (e) => {
     setPayAmount(e.target.value);
@@ -180,6 +188,8 @@ const PayBillForm = () => {
 
       <PayBillSet
         billOptions={billOptions}
+        billSelected={billSelected}
+        handleBillSelection={handleBillSelection}
         handlePayAmountChange={handlePayAmountChange}
       />
 
