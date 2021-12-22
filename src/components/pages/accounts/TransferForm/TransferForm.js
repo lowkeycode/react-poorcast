@@ -192,7 +192,7 @@ const TransferForm = () => {
   useEffect(() => {
     const exitModal = (e) => {
       if (e.key === "Escape") {
-        usersCtx.setModalOpen(false);
+        usersCtx.setTransferModalOpen(false);
       }
     };
 

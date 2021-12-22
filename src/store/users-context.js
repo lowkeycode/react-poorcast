@@ -7,7 +7,6 @@ const UsersContext = createContext({
   users: [],
   formattedAccts: [],
   transferModalOpen: false,
-  onTransferModalOpen: () => {},
 });
 
 export const UsersContextProvider = ({ children }) => {
