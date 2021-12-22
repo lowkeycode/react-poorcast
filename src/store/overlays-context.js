@@ -11,9 +11,6 @@ export const OverlaysContextProvider = ({children}) => {
   const [transferModalOpen, setTransferModalOpen] = useState(false);
   const [payBillModalOpen, setPayBillModalOpen] = useState(false);
 
-  console.log(transferModalOpen);
-  console.log(payBillModalOpen);
-
   useEffect(() => {
     const exitModal = (e) => {
       if (e.key === "Escape") {

@@ -37,7 +37,6 @@ const ListCard = ({ title, headings }) => {
     })
   }, [])
 
-  console.log(billsArr);
 
   useEffect(() => {
     const budgetRef = ref(realtime, 'budget');
@@ -59,7 +58,6 @@ const ListCard = ({ title, headings }) => {
     
   }, [])
 
-  console.log(budgetArr);
 
   const showBillAdd = () => {
     setAddingBill(true)
