@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
-import { ref, onValue} from 'firebase/database';
+import { ref, onValue, update} from 'firebase/database';
 
 import realtime from '../../../../firebase/realtime';
 import { retrieveUserAccts, capitalize } from '../../../../utils/utils';
 
 import UsersContext from '../../../../store/users-context';
+import OverlaysContext from "../../../../store/overlays-context";
 
 import PayFromSet from '../PayFromSet/PayFromSet';
 import PayBillSet from '../PayBillSet/PayBillSet';
@@ -16,6 +17,7 @@ import rightArrow from '../../../../img/arrow-forward-outline.svg';
 const PayBillForm = () => {
 
   const usersCtx = useContext(UsersContext);
+  const overlaysCtx = useContext(OverlaysContext);
 
   const { users } = usersCtx;
 
@@ -56,6 +58,57 @@ const PayBillForm = () => {
     });
   }, [fromUserSelected]);
 
+  const subtractFromAcct = () => {
+    if (!fromAmount) return;
+
+    const acctRef = ref(realtime, `users/${fromUserKey}`);
+
+    console.log(acctRef);
+
+    let acctPath = "";
+
+    onValue(acctRef, (snapshot) => {
+      const acct = snapshot.val();
+
+      console.log(acct)
+
+      const acctIndex = acct.accts.findIndex((acctObj) => {
+        return acctObj.acctName === capitalize(fromUserAcctSelected);
+      });
+
+      acctPath = `users/${fromUserKey}/accts/${acctIndex}/`;
+
+      console.log(acctPath);
+      
+    });
+
+    const subtractRef = ref(realtime, acctPath);
+
+    onValue(
+      subtractRef,
+      (snapshot) => {
+        const targetAcct = snapshot.val();
+        
+        if (targetAcct.acctType === "chequings/savings") {
+          const balance = targetAcct.acctBalance;
+          update(ref(realtime, acctPath), {
+            acctBalance: balance - fromAmount,
+          });
+          
+        } else if (targetAcct.acctType === "credit") {
+          const balance = targetAcct.acctSpent;
+          update(ref(realtime, acctPath), {
+            acctSpent: +balance + +fromAmount,
+          });
+          
+        }
+      },
+      {
+        onlyOnce: true,
+      }
+    );
+  };
+
   const handleFromUserSelection = (e) => {
     setFromUserSelected(e.target.value);
 
@@ -70,8 +123,15 @@ const PayBillForm = () => {
     setFromAmount(e.target.value);
   };
 
+  const handlePayBill = (e) => {
+    e.preventDefault();
+    subtractFromAcct();
+    // ! Call pay bill function here
+    overlaysCtx.setPayBillModalOpen(false);
+  };
+
   return (
-    <form  className={styles["pay-form"]}>
+    <form onSubmit={handlePayBill} className={styles["pay-form"]}>
       <h3 className={styles["form-heading"]}>Pay Bill</h3>
 
       <PayFromSet 
