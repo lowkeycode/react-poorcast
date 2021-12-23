@@ -32,9 +32,9 @@ const PayBillForm = () => {
 
   const [bills, setBills] = useState([]);
   const [billOptions, setBillOptions] = useState([]);
-  const [billSelected, setBillSelected] = useState('placeholder')
+  const [billSelected, setBillSelected] = useState("placeholder");
   const [payAmount, setPayAmount] = useState(0);
-  const [billKey, setBillKey] = useState('');
+  const [billKey, setBillKey] = useState("");
 
   useEffect(() => {
     let userArr = [];
@@ -63,7 +63,7 @@ const PayBillForm = () => {
   }, [fromUserSelected]);
 
   useEffect(() => {
-    const dbRef = ref(realtime, 'bills');
+    const dbRef = ref(realtime, "bills");
 
     onValue(dbRef, (snapshot) => {
       const bills = snapshot.val();
@@ -81,19 +81,16 @@ const PayBillForm = () => {
 
     const acctRef = ref(realtime, `users/${fromUserKey}`);
 
-
     let acctPath = "";
 
     onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
-
 
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(fromUserAcctSelected);
       });
 
       acctPath = `users/${fromUserKey}/accts/${acctIndex}/`;
-
     });
 
     const subtractRef = ref(realtime, acctPath);
@@ -145,8 +142,7 @@ const PayBillForm = () => {
   }, [bills]);
 
   const payBill = () => {
-    if(!fromAmount || !payAmount) return;
-
+    if (!fromAmount || !payAmount) return;
 
     const billToPay = ref(realtime, `bills/${billKey}`);
 
@@ -155,22 +151,17 @@ const PayBillForm = () => {
       (snapshot) => {
         const targetBill = snapshot.val();
 
-
         const owing = targetBill.billOwing;
-
 
         update(billToPay, {
           billOwing: owing - payAmount,
         });
-       
       },
       {
         onlyOnce: true,
       }
     );
-  }
-
-
+  };
 
   const handleFromUserSelection = (e) => {
     setFromUserSelected(e.target.value);
@@ -188,7 +179,7 @@ const PayBillForm = () => {
 
   const handleBillSelection = (e) => {
     setBillSelected(e.target.value);
-  }
+  };
 
   const handlePayAmountChange = (e) => {
     setPayAmount(e.target.value);
