@@ -38,17 +38,21 @@ const BillItem = ({billInfo}) => {
   }
 
 
-  //  * PAID Element
-  // <div className={styles.paid}>
-  //   <img src={paidSvg} alt="Paid stamp"/>
-  // </div>
   
   return (
     <li className={styles['list__item']}>
       <p>{billInfo.bill}</p>
       <p>{`${dueMonth} ${formatOrdinals(dueDay)}`}</p>
       <p>${billInfo.billAmount}</p>
-      <p>${billInfo.billOwing}</p>
+      {
+        billInfo.billOwing > 0 ? (
+          <p>${billInfo.billOwing}</p>
+        ) : (
+          <div className={styles.paid}>
+            <img src={paidSvg} alt="Paid stamp"/>
+          </div>
+        )
+      }
       
       <button className={styles.delete} onClick={deleteBillItem}>
         <img src={deleteSvg} alt="Delete item"/>

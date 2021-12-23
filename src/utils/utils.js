@@ -27,8 +27,6 @@ export const retrieveUserAccts = (e, setStateFunc) => {
 
       const capitalizeUser = capitalize(selectedUser);
       
-      console.log(capitalizeUser);
-      console.log(users);
 
       let foundUserAccts;
       let formattedAccts = [];

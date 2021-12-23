@@ -107,12 +107,12 @@ const ListCard = ({ title, headings }) => {
         </li>
         {
           title === 'Bills' ? (
-            billsArr.map((bill, i) => {
-              return <BillItem key={i} billInfo={bill}/>
+            billsArr.map(bill => {
+              return <BillItem key={bill.key} billInfo={bill}/>
             })
           ) : (
-            budgetArr.map((budgetItem, i) => {
-              return <BudgetItem key={i} budgetInfo={budgetItem}/>
+            budgetArr.map(budgetItem => {
+              return <BudgetItem key={budgetItem.key} budgetInfo={budgetItem}/>
             })
           )
         }

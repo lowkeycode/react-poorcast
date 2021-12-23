@@ -34,6 +34,7 @@ const PayBillForm = () => {
   const [billOptions, setBillOptions] = useState([]);
   const [billSelected, setBillSelected] = useState('placeholder')
   const [payAmount, setPayAmount] = useState(0);
+  const [billKey, setBillKey] = useState('');
 
   useEffect(() => {
     let userArr = [];
@@ -61,19 +62,31 @@ const PayBillForm = () => {
     });
   }, [fromUserSelected]);
 
+  useEffect(() => {
+    const dbRef = ref(realtime, 'bills');
+
+    onValue(dbRef, (snapshot) => {
+      const bills = snapshot.val();
+
+      for (let bill in bills) {
+        if (bills[bill].bill === capitalize(billSelected)) {
+          setBillKey(bill);
+        }
+      }
+    });
+  }, [billSelected]);
+
   const subtractFromAcct = () => {
     if (!fromAmount) return;
 
     const acctRef = ref(realtime, `users/${fromUserKey}`);
 
-    console.log(acctRef);
 
     let acctPath = "";
 
     onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
 
-      console.log(acct);
 
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(fromUserAcctSelected);
@@ -81,7 +94,6 @@ const PayBillForm = () => {
 
       acctPath = `users/${fromUserKey}/accts/${acctIndex}/`;
 
-      console.log(acctPath);
     });
 
     const subtractRef = ref(realtime, acctPath);
@@ -134,9 +146,30 @@ const PayBillForm = () => {
 
   const payBill = () => {
     if(!fromAmount || !payAmount) return;
+
+
+    const billToPay = ref(realtime, `bills/${billKey}`);
+
+    onValue(
+      billToPay,
+      (snapshot) => {
+        const targetBill = snapshot.val();
+
+
+        const owing = targetBill.billOwing;
+
+
+        update(billToPay, {
+          billOwing: owing - payAmount,
+        });
+       
+      },
+      {
+        onlyOnce: true,
+      }
+    );
   }
 
-  console.log(billSelected);
 
 
   const handleFromUserSelection = (e) => {
@@ -164,7 +197,7 @@ const PayBillForm = () => {
   const handlePayBill = (e) => {
     e.preventDefault();
     subtractFromAcct();
-    // ! Call pay bill function here
+    payBill();
     overlaysCtx.setPayBillModalOpen(false);
   };
 

@@ -35,7 +35,6 @@ const BillsSet = ({hideBillAdd}) => {
       billOwing: billAmount
     }
 
-    console.log(billObj);
 
     const billsRef = ref(realtime, 'bills');
 

@@ -85,8 +85,6 @@
 .paid {
   width: 3.5rem;
   transform: rotate(-27deg);
-  position: absolute;
-  right: 4rem;
 }
 
 .delete img,
