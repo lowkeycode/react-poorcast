@@ -8,7 +8,7 @@ const AddPersonNav = () => {
   return (
     <>
       <li className={styles['nav__links--link']}>
-        <Link to='/accounts' className={styles['back-btn__img']}>
+        <Link to='/accounts'>
           <img src={backSvg} alt="Back to account"/>
         </Link>
         <p className={styles['icon-description']}>Accounts</p>

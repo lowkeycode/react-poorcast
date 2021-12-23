@@ -16,7 +16,7 @@ const AcctsNav = () => {
         <Link to='/'>
           <img src={overviewSvg} alt="Link to budget overview page"/>
         </Link>
-        <p className={styles['icon-description']}>Budget</p>
+        <p className={styles['icon-description']}>Overview</p>
       </li> 
       <li className={styles['nav__links--link']}>
         <button onClick={() => overlaysCtx.setTransferModalOpen(true)} className={styles.transfer}>
