@@ -35,12 +35,15 @@ const BudgetItem = ({budgetInfo}) => {
   }
 
 
+
   return (
     <li className={styles['list__item']}>
       <p>{budgetInfo.budgetPerson}</p>
       <p>{budgetInfo.budgetBill}</p>
       <p>${budgetInfo.budgetAmount}</p>
       <p>{`${payOnMonth} ${formatOrdinals(payOnDay)}`}</p>
+
+      
       
       <button className={styles.delete} onClick={deleteBudgetItem}>
         <img src={deleteSvg} alt="Delete item"/>

@@ -27,7 +27,6 @@ const PayBillForm = () => {
   const [fromUserAcctSelected, setFromUserAcctSelected] =
     useState("placeholder");
 
-  const [fromAmount, setFromAmount] = useState(0);
   const [fromUserKey, setFromUserKey] = useState("");
 
   const [bills, setBills] = useState([]);
@@ -77,7 +76,7 @@ const PayBillForm = () => {
   }, [billSelected]);
 
   const subtractFromAcct = () => {
-    if (!fromAmount) return;
+    if (!payAmount) return;
 
     const acctRef = ref(realtime, `users/${fromUserKey}`);
 
@@ -103,12 +102,12 @@ const PayBillForm = () => {
         if (targetAcct.acctType === "chequings/savings") {
           const balance = targetAcct.acctBalance;
           update(ref(realtime, acctPath), {
-            acctBalance: balance - fromAmount,
+            acctBalance: balance - payAmount,
           });
         } else if (targetAcct.acctType === "credit") {
           const balance = targetAcct.acctSpent;
           update(ref(realtime, acctPath), {
-            acctSpent: +balance + +fromAmount,
+            acctSpent: +balance + +payAmount,
           });
         }
       },
@@ -142,7 +141,7 @@ const PayBillForm = () => {
   }, [bills]);
 
   const payBill = () => {
-    if (!fromAmount || !payAmount) return;
+    if (!payAmount) return;
 
     const billToPay = ref(realtime, `bills/${billKey}`);
 
@@ -173,9 +172,6 @@ const PayBillForm = () => {
     setFromUserAcctSelected(e.target.value);
   };
 
-  const handleFromAmountChange = (e) => {
-    setFromAmount(e.target.value);
-  };
 
   const handleBillSelection = (e) => {
     setBillSelected(e.target.value);
@@ -196,6 +192,18 @@ const PayBillForm = () => {
     <form onSubmit={handlePayBill} className={styles["pay-form"]}>
       <h3 className={styles["form-heading"]}>Pay Bill</h3>
 
+      
+      <PayBillSet
+        billOptions={billOptions}
+        billSelected={billSelected}
+        handleBillSelection={handleBillSelection}
+        handlePayAmountChange={handlePayAmountChange}
+      />
+
+      <div className={styles.arrow}>
+        <img src={rightArrow} alt="Right arrow" />
+      </div>
+
       <PayFromSet
         fromUserSelected={fromUserSelected}
         handleFromUserSelection={handleFromUserSelection}
@@ -203,19 +211,8 @@ const PayBillForm = () => {
         fromUserAccts={fromUserAccts}
         handleFromUserAcctSelection={handleFromUserAcctSelection}
         fromUserAcctSelected={fromUserAcctSelected}
-        handleFromAmountChange={handleFromAmountChange}
       />
-
-      <div className={styles.arrow}>
-        <img src={rightArrow} alt="Right arrow" />
-      </div>
-
-      <PayBillSet
-        billOptions={billOptions}
-        billSelected={billSelected}
-        handleBillSelection={handleBillSelection}
-        handlePayAmountChange={handlePayAmountChange}
-      />
+      
 
       <div className={styles["btn-container"]}>
         <BlackButton text="Confirm" type="submit" />

@@ -1,6 +1,6 @@
 import styles from '../PayBillForm/PayBillForm.module.css';
 
-const PayFromSet = ({ fromUserSelected, handleFromUserSelection, userOptions, handleFromUserAcctSelection, fromUserAcctSelected, fromUserAccts, handleFromAmountChange }) => {
+const PayFromSet = ({ fromUserSelected, handleFromUserSelection, userOptions, handleFromUserAcctSelection, fromUserAcctSelected, fromUserAccts }) => {
   return (
     <fieldset className={styles['acct-set']}>
       <legend>From</legend>
@@ -27,11 +27,6 @@ const PayFromSet = ({ fromUserSelected, handleFromUserSelection, userOptions, ha
             })
           }
         </select>
-      </div>
-
-      <div>
-        <label htmlFor="amount">Amount</label>
-        <input onChange={handleFromAmountChange} type="number"/>
       </div>
 
     </fieldset>
