@@ -3,6 +3,8 @@ import { useState, useEffect, useContext } from "react";
 
 import realtime from "../../../../firebase/realtime";
 import { retrieveUserAccts, capitalize } from "../../../../utils/utils";
+
+import UsersContext from '../../../../store/users-context';
 import OverlaysContext from "../../../../store/overlays-context";
 
 import BlackButton from "../../../UI/BlackButton/BlackButton";
@@ -13,9 +15,11 @@ import styles from "./TransferForm.module.css";
 import rightArrow from "../../../../img/arrow-forward-outline.svg";
 
 const TransferForm = () => {
+  const usersCtx = useContext(UsersContext);
   const overlaysCtx = useContext(OverlaysContext);
 
-  const [users, setUsers] = useState([]);
+  const { users } = usersCtx;
+
   const [userOptions, setUserOptions] = useState([]);
 
   const [fromUserSelected, setFromUserSelected] = useState("placeholder");
@@ -32,18 +36,9 @@ const TransferForm = () => {
   const [fromUserKey, setFromUserKey] = useState("");
   const [toUserKey, setToUserKey] = useState("");
 
-  // On render get users from db and save to state to decouple from other useEffects
-  useEffect(() => {
-    const dbRef = ref(realtime, 'users');
+ 
 
-    onValue(dbRef, (snapshot) => {
-      const users = snapshot.val();
-
-      setUsers(users);
-    });
-  }, []);
-
-  // Set user options from acct names in state
+  // Set user options from acct names in context
   useEffect(() => {
     let userArr = [];
     for (let acct in users) {
@@ -62,12 +57,12 @@ const TransferForm = () => {
 
     onValue(dbRef, (snapshot) => {
       const users = snapshot.val();
-
       for (let user in users) {
         if (users[user].name === capitalize(fromUserSelected)) {
           setFromUserKey(user);
         }
       }
+
     });
   }, [fromUserSelected]);
 
@@ -188,6 +183,7 @@ const TransferForm = () => {
       }
     );
   };
+
 
   
 
