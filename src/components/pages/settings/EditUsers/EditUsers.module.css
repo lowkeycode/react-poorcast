@@ -25,5 +25,5 @@
 }
 
 .card {
-  padding: var(--space-xs) 0;
+  padding: var(--space-lrg) var(--space-med) 0 var(--space-med);
 }
