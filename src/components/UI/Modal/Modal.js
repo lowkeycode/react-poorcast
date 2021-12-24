@@ -4,6 +4,8 @@ import GreyCard from "../GreyCard/GreyCard";
 import Overlay from "../Overlay/Overlay";
 import TransferForm from "../../pages/accounts/TransferForm/TransferForm";
 import PayBillForm from '../../pages/overview/PayBillForm/PayBillForm';
+import DeleteUserConfirm from '../../pages/settings/DeleteUserConfirm/DeleteUserConfirm';
+
 
 import styles from "./Modal.module.css";
 
@@ -20,6 +22,9 @@ const Modal = ({ type }) => {
           }
           {
             type === 'pay' && <PayBillForm />
+          }
+          {
+            type === 'delete-user' && <DeleteUserConfirm/>
           }
         </GreyCard>,
         portalEl

@@ -6,11 +6,13 @@ import realtime from "../firebase/realtime";
 const UsersContext = createContext({
   users: [],
   formattedAccts: [],
+  selectedDeleteUser: ''
 });
 
 export const UsersContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [formattedAccts, setFormattedAccts] = useState([]);
+  const [selectedDeleteUser, setSelectedDeleteUser] = useState('');
 
   // Get all user info on page load
   useEffect(() => {
@@ -45,6 +47,8 @@ export const UsersContextProvider = ({ children }) => {
       value={{
         users: users,
         formattedAccts: formattedAccts,
+        selectedDeleteUser: selectedDeleteUser,
+        setSelectedDeleteUser: setSelectedDeleteUser,
       }}
     >
       {children}

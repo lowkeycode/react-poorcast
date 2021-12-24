@@ -1,0 +1,13 @@
+.delete-confirm {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: center;
+}
+
+.prompt,
+.prompt span {
+  font-weight: 400;
+  letter-spacing: 1px;
+}

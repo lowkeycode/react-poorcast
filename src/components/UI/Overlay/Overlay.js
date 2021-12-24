@@ -12,6 +12,7 @@ const overlaysCtx = useContext(OverlaysContext);
     <div className={styles.overlay} onClick={()=>{
       overlaysCtx.setTransferModalOpen(false);
       overlaysCtx.setPayBillModalOpen(false);
+      overlaysCtx.setDeleteUserModalOpen(false);
     }}/>
   )
 }

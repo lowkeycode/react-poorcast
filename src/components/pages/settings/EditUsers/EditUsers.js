@@ -1,20 +1,23 @@
 import { useState, useEffect, useContext } from "react";
 
 import UsersContext from "../../../../store/users-context";
+import OverlaysContext from "../../../../store/overlays-context";
 
-import { capitalize } from '../../../../utils/utils';
+import { capitalize } from "../../../../utils/utils";
 
 import EditUsersSelect from "../EditUserSelect/EditUsersSelect";
 import GreyCard from "../../../UI/GreyCard/GreyCard";
 import EditAccount from "../EditAccount/EditAccount";
+import Modal from '../../../UI/Modal/Modal';
 
 import styles from "./EditUsers.module.css";
 import deleteUser from "../../../../img/person-remove-outline.svg";
 
 const EditUsers = () => {
   const usersCtx = useContext(UsersContext);
+  const overlaysCtx = useContext(OverlaysContext);
 
-  const { users, formattedAccts } = usersCtx;
+  const { users, formattedAccts, setSelectedDeleteUser } = usersCtx;
 
   const [userOptions, setUserOptions] = useState([]);
   const [userSelected, setUserSelected] = useState("placeholder");
@@ -39,21 +42,30 @@ const EditUsers = () => {
 
     const acctIndex = formattedAccts.findIndex((acctObj) => {
       return acctObj.name === capitalize(userSelected);
-    })
+    });
 
     console.log(acctIndex);
 
-    setUserIndex(acctIndex)
-  }, [userSelected, formattedAccts])
+    setUserIndex(acctIndex);
+  }, [userSelected, formattedAccts]);
 
   const handleUserSelected = (e) => {
     setUserSelected(e.target.value);
+    setSelectedDeleteUser(e.target.value);
   };
+
 
   console.log(formattedAccts[userIndex]);
 
+  console.log(overlaysCtx.deleteUserModalOpen);
+
   return (
     <section className={styles["edit-users"]}>
+
+      {
+        overlaysCtx.deleteUserModalOpen && <Modal type='delete-user'/>
+      }
+
       <h2 className={styles.heading}>Edit Users</h2>
 
       <div className={styles["select-delete"]}>
@@ -63,24 +75,20 @@ const EditUsers = () => {
           handleUserSelected={handleUserSelected}
         />
 
-        <button className={styles["delete-user"]}>
-          <img src={deleteUser} alt="Delete user" />
-        </button>
+        {userSelected !== 'placeholder' && <button onClick={() => overlaysCtx.setDeleteUserModalOpen(true)} className={styles["delete-user"]}>
+        <img src={deleteUser} alt="Delete user" />
+      </button>}
       </div>
 
-      <GreyCard className={styles.card}>
-      {
-        userIndex > -1 ? (
-          formattedAccts[userIndex].accts.map((acct, i) => {
-            return <EditAccount key={i} acctInfo={acct} />;
-            })
-        ) : (
-          null
-        )
-      }
-      </GreyCard>
-
-
+      {userSelected !== "placeholder" && (
+        <GreyCard className={styles.card}>
+          {userIndex > -1
+            ? formattedAccts[userIndex].accts.map((acct, i) => {
+                return <EditAccount key={i} acctInfo={acct} />;
+              })
+            : null}
+        </GreyCard>
+      )}
     </section>
   );
 };

@@ -248,7 +248,7 @@ const TransferForm = () => {
       />
 
       <div className={styles["btn-container"]}>
-        <BlackButton text="Confirm" type="submit" />
+        <BlackButton text="Confirm" type="submit"/>
       </div>
     </form>
   );

@@ -88,7 +88,7 @@ const AddPersonForm = () => {
 
             </div>
 
-            <BlackButton text='Save User'/>
+            <BlackButton text='Save User' type='submit'/>
           </form>
         ) : (
           <Navigate to="/"/>
