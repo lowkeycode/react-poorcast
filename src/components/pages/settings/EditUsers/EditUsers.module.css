@@ -1,0 +1,29 @@
+.edit-users {
+  width: 83%;
+}
+
+.heading {
+  margin: var(--space-lrg) 0 var(--space-sml) 0;
+  font-weight: 400;
+}
+
+.select-delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-user {
+  width: 1.6rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-right: var(--space-xs);
+}
+
+.delete-user img {
+  width: 100%;
+}
+
+.card {
+  padding: var(--space-xs) 0;
+}

@@ -1,0 +1,66 @@
+.account {
+  width: 10rem;
+  height: 15rem;
+  background: var(--color-white-pure);
+  border: 1px solid var(--color-grey-med);
+  border-radius: var(--br-med);
+  margin: 0 var(--space-xs) var(--space-lrg) var(--space-xs);
+
+  padding: var(--space-sml);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.account > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account__heading {
+  text-align: center;
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+
+.account__total,
+.account__avail {
+  background: var(--color-grey-light);
+  font-weight: 300;
+  width: 100%;
+  padding: 0.4rem 0;
+  border-radius: var(--br-sml);
+}
+
+.account__balance {
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.account__balance span {
+  font-weight: 400;
+}
+
+.buttons {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.1rem;
+  flex-direction: row;
+}
+
+.button {
+  width: 1.2rem;
+  border: none;
+  background: transparent;
+  display: flex;
+  margin-right: 0.2rem;
+  cursor: pointer;
+}
+
+.button img {
+  width: 100%;
+}
