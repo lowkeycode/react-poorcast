@@ -17,7 +17,7 @@ const EditUsers = () => {
   const usersCtx = useContext(UsersContext);
   const overlaysCtx = useContext(OverlaysContext);
 
-  const { users, formattedAccts, setSelectedDeleteUser } = usersCtx;
+  const { users, formattedAccts, setSelectedDeleteUser, setSelectedDeleteUserKey } = usersCtx;
 
   const [userOptions, setUserOptions] = useState([]);
   const [userSelected, setUserSelected] = useState("placeholder");
@@ -37,27 +37,18 @@ const EditUsers = () => {
   }, [users]);
 
   useEffect(() => {
-    console.log(formattedAccts);
-    console.log(userSelected);
-
     const acctIndex = formattedAccts.findIndex((acctObj) => {
       return acctObj.name === capitalize(userSelected);
     });
 
-    console.log(acctIndex);
-
     setUserIndex(acctIndex);
-  }, [userSelected, formattedAccts]);
+    setSelectedDeleteUserKey(formattedAccts[acctIndex]?.key)
+  }, [userSelected, formattedAccts, setSelectedDeleteUserKey]);
 
   const handleUserSelected = (e) => {
     setUserSelected(e.target.value);
     setSelectedDeleteUser(e.target.value);
   };
-
-
-  console.log(formattedAccts[userIndex]);
-
-  console.log(overlaysCtx.deleteUserModalOpen);
 
   return (
     <section className={styles["edit-users"]}>
@@ -83,7 +74,7 @@ const EditUsers = () => {
       {userSelected !== "placeholder" && (
         <GreyCard className={styles.card}>
           {userIndex > -1
-            ? formattedAccts[userIndex].accts.map((acct, i) => {
+            ? formattedAccts[userIndex]?.accts.map((acct, i) => {
                 return <EditAccount key={i} acctInfo={acct} />;
               })
             : null}

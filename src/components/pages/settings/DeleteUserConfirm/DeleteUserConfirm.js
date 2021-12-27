@@ -1,5 +1,8 @@
 import { useContext } from "react";
+import {ref, remove } from 'firebase/database';
+import { useNavigate } from 'react-router-dom'
 
+import realtime from '../../../../firebase/realtime';
 import { capitalize } from "../../../../utils/utils";
 
 import UsersContext from "../../../../store/users-context";
@@ -14,12 +17,25 @@ const DeleteUserConfirm = () => {
   const usersCtx = useContext(UsersContext);
   const overlaysCtx = useContext(OverlaysContext);
 
-  console.log(overlaysCtx.deleteUserModalOpen);
+  const navigate = useNavigate();
+
+  const deleteUser = (e) => {
+    e.preventDefault();
+
+    const targetUser = ref(realtime, `users/${usersCtx.selectedDeleteUserKey}`)
+
+    remove(targetUser);
+    overlaysCtx.setDeleteUserModalOpen(false);
+    navigate('/accounts');
+  }
+
+  console.log(usersCtx.selectedDeleteUserKey);
+
 
   return (
     <form className={styles['delete-confirm']}>
       <h2 className={styles.prompt}>Delete User: <span>{capitalize(usersCtx.selectedDeleteUser)}?</span></h2>
-      <BlackButton text="Delete User" type="submit"/>
+      <BlackButton text="Delete User" type="submit" onClick={deleteUser}/>
       <BlackButton text="Go Back" type="button" onClick={() => overlaysCtx.setDeleteUserModalOpen(false)}/>
     </form>
   )
