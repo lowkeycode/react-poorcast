@@ -22,7 +22,7 @@ const AddPersonForm = () => {
   const [userSaved, setUserSaved] = useState(false);
 
   const addAcct = (e) => {
-    console.log(e);
+    // console.log(e);
     const newAccts = [...userAccts, {}]
     setUserAccts(newAccts);
   }
@@ -57,7 +57,7 @@ const AddPersonForm = () => {
     setAccts(newAcctsArr);
   }
 
-  console.log(accts);
+  // console.log(accts);
  
 
   return (

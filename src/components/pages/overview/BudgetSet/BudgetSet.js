@@ -47,13 +47,13 @@ const BudgetSet = ({hideBudgetAdd}) => {
   }
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={saveBudget}>
       <fieldset className={styles.set}>
         <legend>Add Bill</legend>
 
         <div className={styles["save-container"]}>
           <p>Save</p>
-          <button onClick={saveBudget} type="button" className={styles.save}>
+          <button type="submit" className={styles.save}>
             <img src={saveSvg} alt="Save account" />
           </button>
         </div>

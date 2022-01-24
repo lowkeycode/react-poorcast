@@ -29,7 +29,7 @@ const DeleteUserConfirm = () => {
     navigate('/accounts');
   }
 
-  console.log(usersCtx.selectedDeleteUserKey);
+  // console.log(usersCtx.selectedDeleteUserKey);
 
 
   return (
