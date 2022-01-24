@@ -38,7 +38,7 @@ const AcctSet = ({ getAcctInfo }) => {
     setSavedAcct(true);
   };
 
-  console.log(savedAcct);
+  // console.log(savedAcct);
 
   return (
     <fieldset className={styles["acct-set"]}>

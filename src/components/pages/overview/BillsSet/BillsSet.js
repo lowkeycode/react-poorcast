@@ -18,6 +18,7 @@ const BillsSet = ({hideBillAdd}) => {
   }
 
   const handleBillDue = (e) => {
+    
     setBillDue(e.target.value);
   }
 
@@ -25,9 +26,9 @@ const BillsSet = ({hideBillAdd}) => {
     setBillAmount(e.target.value);
   }
 
-
-
   const saveBill = () => {
+    // console.log("Saving bill");
+    // console.log('Date', billDue);
     const billObj = {
       bill: capitalize(bill),
       billDue,
@@ -46,13 +47,13 @@ const BillsSet = ({hideBillAdd}) => {
   
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={saveBill}>
       <fieldset className={styles.set}>
         <legend>Add Bill</legend>
 
         <div className={styles["save-container"]}>
           <p>Save</p>
-          <button onClick={saveBill} type="button" className={styles.save}>
+          <button type="submit" className={styles.save}>
             <img src={saveSvg} alt="Save account" />
           </button>
         </div>

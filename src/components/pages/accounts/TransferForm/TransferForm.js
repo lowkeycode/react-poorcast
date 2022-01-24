@@ -74,7 +74,7 @@ const TransferForm = () => {
 
       for (let user in users) {
         if (users[user].name === capitalize(toUserSelected)) {
-          console.log('to user', user);
+          // console.log('to user', user);
           setToUserKey(user);
         }
       }
@@ -86,14 +86,14 @@ const TransferForm = () => {
 
     const acctRef = ref(realtime, `users/${fromUserKey}`);
 
-    console.log(acctRef);
+    // console.log(acctRef);
 
     let acctPath = "";
 
     onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
 
-      console.log(acct)
+      // console.log(acct)
 
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(fromUserAcctSelected);
@@ -101,7 +101,7 @@ const TransferForm = () => {
 
       acctPath = `users/${fromUserKey}/accts/${acctIndex}/`;
 
-      console.log(acctPath);
+      // console.log(acctPath);
       
     });
 
@@ -137,22 +137,22 @@ const TransferForm = () => {
 
     const acctRef = ref(realtime, `users/${toUserKey}`);
 
-    console.log('acct ref', acctRef);
+    // console.log('acct ref', acctRef);
 
     let acctPath = "";
 
     onValue(acctRef, (snapshot) => {
       const acct = snapshot.val();
 
-      console.log('acct', acct);
-      console.log(toUserAcctSelected);
+      // console.log('acct', acct);
+      // console.log(toUserAcctSelected);
 
       const acctIndex = acct.accts.findIndex((acctObj) => {
         return acctObj.acctName === capitalize(toUserAcctSelected);
       });
 
       acctPath = `users/${toUserKey}/accts/${acctIndex}/`;
-      console.log(acctPath);
+      // console.log(acctPath);
     });
 
     const subtractRef = ref(realtime, acctPath);
@@ -162,7 +162,7 @@ const TransferForm = () => {
       (snapshot) => {
         const targetAcct = snapshot.val();
 
-        console.log('target Acct', targetAcct);
+        // console.log('target Acct', targetAcct);
         
         if (targetAcct.acctType === "chequings/savings") {
           const balance = targetAcct.acctBalance;
